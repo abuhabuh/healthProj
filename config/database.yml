@@ -1,14 +1,12 @@
-# SQLite version 3.x
-#   gem install sqlite3
-#
-#   Ensure the SQLite 3 gem is defined in your Gemfile
-#   gem 'sqlite3'
+# Using MySQL utf8 encoding
+
+
 development:
   host: localhost
   encoding: utf8
   adapter: mysql2
   database: health_quality_dev
-  user: health_app
+  username: health_app
   password: health_app
   port: 3306
   pool: 5

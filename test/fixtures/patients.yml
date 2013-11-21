@@ -1,0 +1,41 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  medical_record_id: 1
+  last_name: MyString
+  first_name: MyString
+  middle_initial: MyString
+  address1: MyString
+  address2: MyString
+  city: MyString
+  state: MyString
+  phone_home: MyString
+  phone: MyString
+  work_phone: MyString
+  cell_phone: MyString
+  date_of_birth: 2013-11-17
+  time: MyString
+  gender: MyString
+  race: MyString
+  ethnicity: MyString
+  preferred_language: MyString
+
+two:
+  medical_record_id: 1
+  last_name: MyString
+  first_name: MyString
+  middle_initial: MyString
+  address1: MyString
+  address2: MyString
+  city: MyString
+  state: MyString
+  phone_home: MyString
+  phone: MyString
+  work_phone: MyString
+  cell_phone: MyString
+  date_of_birth: 2013-11-17
+  time: MyString
+  gender: MyString
+  race: MyString
+  ethnicity: MyString
+  preferred_language: MyString

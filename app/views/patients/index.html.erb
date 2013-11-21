@@ -1,0 +1,19 @@
+<% content_for :javascript do %>
+  <%= javascript_include_tag "patients.js" %>
+<% end %>
+
+
+<h1>Listing patients</h1>
+
+<div class='patients-list-container-hor'>
+
+  <% @patients.each do |patient| %>
+    <%= render partial: "patients/shared/patient_hor",
+          locals: {patient: patient} %>
+  <% end %>
+
+</div>
+
+<br>
+
+<%= link_to 'New Patient', new_patient_path %>
