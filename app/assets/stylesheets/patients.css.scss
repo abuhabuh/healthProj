@@ -1,0 +1,28 @@
+// Place all the styles related to the Patients controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+
+.patients-list-container-hor {
+  width: 100%;
+}
+
+.patient-container-hor {
+  float: left;
+  width: 100%;
+}
+.patient-main-hor {
+  @extend .patiend-container-hor
+}
+.patient-detail-hor {
+
+  @extend .patient-container-hor;
+}
+  .patient-container-text-heading {
+    font-weight:bold;
+  }
+  .patient-container-text-normal {
+    font-weight:normal;
+
+  }
+
