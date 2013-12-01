@@ -8,7 +8,7 @@
 <div class='patients-list-container-hor'>
 
   <% @patients.each do |patient| %>
-    <%= render partial: "patients/shared/patient_hor",
+    <%= render partial: "patients/shared/patient_hor", 
           locals: {patient: patient} %>
   <% end %>
 
