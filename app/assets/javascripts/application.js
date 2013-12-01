@@ -9,8 +9,7 @@
 //
 // Read Sprockets README (https://github.com/sstephenson/sprockets#sprockets-directives) for details
 // about supported directives.
-//
+// 
+// Removed turbolinks - conflict with backbone: //= require turbolinks
 //= require jquery
 //= require jquery_ujs
-//= require turbolinks
-

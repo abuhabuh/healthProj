@@ -25,8 +25,10 @@ gem 'sass-rails', '~> 4.0.0'
 gem 'coffee-rails', '~> 4.0.0'
 
 ########## OTHER #####################
-# Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
-gem 'turbolinks'
+# Turbolinks makes following links in your web application faster.
+#  Read more: https://github.com/rails/turbolinks
+#  Removing due to conflict with backbone
+# gem 'turbolinks'
 # See https://github.com/sstephenson/execjs#readme for more supported runtimes
 # gem 'therubyracer', platforms: :ruby
 group :doc do
