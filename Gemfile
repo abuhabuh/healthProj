@@ -13,6 +13,7 @@ gem 'devise'
 
 
 ########## FRONT END: js, css, etc ################
+gem 'rails-backbone'
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
 # Use Uglifier as compressor for JavaScript assets

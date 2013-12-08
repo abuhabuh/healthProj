@@ -1,19 +1,18 @@
 <% content_for :javascript do %>
-  <%= javascript_include_tag "patients.js" %>
+  <%= javascript_include_tag "backbone/health_proj" %>
+  <%= javascript_include_tag "shared/common" %>
+<% end %>
+<% content_for :css do %>
+  <%= stylesheet_link_tag "patients", media: "all" %>
 <% end %>
 
+<div id='patients'></div>
 
-<h1>Listing patients</h1>
 
-<div class='patients-list-container-hor'>
-
-  <% @patients.each do |patient| %>
-    <%= render partial: "patients/shared/patient_hor",
-          locals: {patient: patient} %>
-  <% end %>
-
-</div>
-
-<br>
-
-<%= link_to 'New Patient', new_patient_path %>
+<script type='text/javascript'>
+  $(function(){
+    window.router = new HealthProj.Routers.PatientsRouter(
+      {patients: <%= @patients.to_json.html_safe -%>});
+    Backbone.history.start();
+  });
+</script>

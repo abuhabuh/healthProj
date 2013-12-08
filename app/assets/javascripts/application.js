@@ -13,3 +13,7 @@
 // Removed turbolinks - conflict with backbone: //= require turbolinks
 //= require jquery
 //= require jquery_ujs
+//= require underscore
+//= require backbone
+//= require backbone_datalink
+//= require backbone_rails_sync

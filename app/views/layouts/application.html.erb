@@ -3,9 +3,16 @@
 
   <head>
     <title>HealthProj</title>
+
+    <!-- include common css sheets, then yield to page specific css -->
     <%= stylesheet_link_tag "application", media: "all" %>
+    <%= stylesheet_link_tag "shared/shared", media: "all" %>
+    <%= stylesheet_link_tag "scaffolds", media: "all" %>
+    <%= yield :css %>
+
     <%= javascript_include_tag "application" %>
     <%= csrf_meta_tags %>
+
   </head>
 
 
@@ -14,8 +21,10 @@
     <%= yield %>
 
 
+    <!-- javascript at bottom of page to speed up loading
+      http://developer.yahoo.com/performance/rules.html#js_bottom -->
     <%= yield :javascript %>
-
+    
   </body>
 
 </html>
