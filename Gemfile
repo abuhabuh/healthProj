@@ -7,6 +7,7 @@ gem 'rails', '4.0.1'
 
 ########### DATABASE #################
 gem 'mysql2'
+gem 'foreigner'
 
 ########### OTHER APP CORE #########
 gem 'devise'

@@ -1,0 +1,27 @@
+<h1>Listing ethnicities</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @ethnicities.each do |ethnicity| %>
+      <tr>
+        <td><%= ethnicity.name %></td>
+        <td><%= link_to 'Show', ethnicity %></td>
+        <td><%= link_to 'Edit', edit_ethnicity_path(ethnicity) %></td>
+        <td><%= link_to 'Destroy', ethnicity, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Ethnicity', new_ethnicity_path %>

@@ -1,9 +1,19 @@
 HealthProj::Application.routes.draw do
+  # *note: always keep this on top
   root to: 'home#index'
 
+  # Edit these routes and take out those taken over by backbone
+  resources :races
+  resources :ethnicities
+  resources :countries
+  resources :languages
   resources :patients
-
   devise_for :users
+
+  # Standard page routes
+  get '/admin', to: 'home#admin'
+
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

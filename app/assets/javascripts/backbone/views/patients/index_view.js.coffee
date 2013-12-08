@@ -11,6 +11,7 @@ class HealthProj.Views.Patients.IndexView extends Backbone.View
 
   addOne: (patient) =>
     view = new HealthProj.Views.Patients.PatientView({model : patient})
+    # TODO: tbody.append should be deleted
     @$("tbody").append(view.render().el)
     @$(".patients-list-container-hor").append(view.render().el)
 

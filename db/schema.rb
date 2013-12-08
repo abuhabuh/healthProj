@@ -11,7 +11,29 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131118042242) do
+ActiveRecord::Schema.define(version: 20131208063455) do
+
+  create_table "countries", force: true do |t|
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "code"
+  end
+
+  create_table "ethnicities", force: true do |t|
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "languages", force: true do |t|
+    t.string   "name"
+    t.integer  "country_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "languages", ["country_id"], name: "languages_country_id_fk", using: :btree
 
   create_table "patients", force: true do |t|
     t.integer  "medical_record_id"
@@ -27,9 +49,19 @@ ActiveRecord::Schema.define(version: 20131118042242) do
     t.string   "cell_phone"
     t.date     "date_of_birth"
     t.string   "gender"
-    t.string   "race"
-    t.string   "ethnicity"
-    t.string   "preferred_language"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "race_id"
+    t.integer  "ethnicity_id"
+    t.integer  "language_id"
+  end
+
+  add_index "patients", ["ethnicity_id"], name: "patients_ethnicity_id_fk", using: :btree
+  add_index "patients", ["language_id"], name: "patients_language_id_fk", using: :btree
+  add_index "patients", ["race_id"], name: "patients_race_id_fk", using: :btree
+
+  create_table "races", force: true do |t|
+    t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -51,5 +83,11 @@ ActiveRecord::Schema.define(version: 20131118042242) do
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
+
+  add_foreign_key "languages", "countries", name: "languages_country_id_fk"
+
+  add_foreign_key "patients", "ethnicities", name: "patients_ethnicity_id_fk"
+  add_foreign_key "patients", "languages", name: "patients_language_id_fk"
+  add_foreign_key "patients", "races", name: "patients_race_id_fk"
 
 end
