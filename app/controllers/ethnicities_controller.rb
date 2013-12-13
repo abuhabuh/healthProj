@@ -1,4 +1,5 @@
 class EthnicitiesController < ApplicationController
+  before_filter :authenticate_user!
   before_action :set_ethnicity, only: [:show, :edit, :update, :destroy]
 
   # GET /ethnicities

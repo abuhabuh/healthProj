@@ -1,4 +1,7 @@
 class PatientsController < ApplicationController
+  before_filter :authenticate_user!
+  # TODO: read up on before_action:
+  #  http://guides.rubyonrails.org/action_controller_overview.html
   before_action :set_patient, only: [:show, :edit, :update, :destroy]
   respond_to :html, :xml, :json
 
@@ -33,11 +36,14 @@ class PatientsController < ApplicationController
 
     respond_to do |format|
       if @patient.save
-        format.html { redirect_to @patient, notice: 'Patient was successfully created.' }
-        format.json { render action: 'show', status: :created, location: @patient }
+        format.html { redirect_to @patient, 
+          notice: 'Patient was successfully created.' }
+        format.json { render action: 'show', 
+          status: :created, location: @patient }
       else
         format.html { render action: 'new' }
-        format.json { render json: @patient.errors, status: :unprocessable_entity }
+        format.json { render json: @patient.errors,
+          status: :unprocessable_entity }
       end
     end
   end
