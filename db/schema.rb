@@ -24,13 +24,13 @@ ActiveRecord::Schema.define(version: 20131215011803) do
 
   create_table "departments", force: true do |t|
     t.string   "name"
-    t.integer  "health_care_provider_id"
+    t.integer  "healthcare_provider_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  add_index "departments", ["health_care_provider_id"], name: "index_departments_on_health_care_provider_id", using: :btree
-  add_index "departments", ["name", "health_care_provider_id"], name: "index_departments_on_name_and_health_care_provider_id", unique: true, using: :btree
+  add_index "departments", ["healthcare_provider_id"], name: "index_departments_on_healthcare_provider_id", using: :btree
+  add_index "departments", ["name", "healthcare_provider_id"], name: "index_departments_on_name_and_healthcare_provider_id", unique: true, using: :btree
 
   create_table "ethnicities", force: true do |t|
     t.string   "name"
@@ -40,7 +40,7 @@ ActiveRecord::Schema.define(version: 20131215011803) do
 
   add_index "ethnicities", ["name"], name: "index_ethnicities_on_name", unique: true, using: :btree
 
-  create_table "health_care_providers", force: true do |t|
+  create_table "healthcare_providers", force: true do |t|
     t.string   "name"
     t.integer  "type"
     t.datetime "created_at"

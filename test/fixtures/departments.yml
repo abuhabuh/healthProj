@@ -2,8 +2,8 @@
 
 one:
   name: MyString
-  health_care_provider_id: 
+  healthcare_provider_id: 
 
 two:
   name: MyString
-  health_care_provider_id: 
+  healthcare_provider_id: 

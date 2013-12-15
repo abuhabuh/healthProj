@@ -1,10 +1,10 @@
-<%= form_for(@health_care_provider) do |f| %>
-  <% if @health_care_provider.errors.any? %>
+<%= form_for(@healthcare_provider) do |f| %>
+  <% if @healthcare_provider.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(@health_care_provider.errors.count, "error") %> prohibited this health_care_provider from being saved:</h2>
+      <h2><%= pluralize(@healthcare_provider.errors.count, "error") %> prohibited this healthcare_provider from being saved:</h2>
 
       <ul>
-      <% @health_care_provider.errors.full_messages.each do |msg| %>
+      <% @healthcare_provider.errors.full_messages.each do |msg| %>
         <li><%= msg %></li>
       <% end %>
       </ul>
