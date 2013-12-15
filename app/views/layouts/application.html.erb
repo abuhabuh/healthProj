@@ -18,9 +18,15 @@
 
   <body>
 
-    <%= render 'layouts/header' %>
+    <div style="max-width:960px">
+      <%= render 'layouts/header' %>
+      <%= render 'layouts/main_nav' %>
 
-    <%= yield %>
+      <div style="clear:left;"> <!-- div sets content on new line -->
+        <%= yield %>
+      </div>
+    </div>
+
 
     <!-- javascript at bottom of page to speed up loading
       http://developer.yahoo.com/performance/rules.html#js_bottom -->

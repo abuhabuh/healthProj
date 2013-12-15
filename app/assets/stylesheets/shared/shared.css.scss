@@ -1,8 +1,18 @@
 /* Shared css file */
 
-/* Maybe use this for sectioning? */
+/* Constants: TODO break constants out into another file so can be shared 
+   to more files? */
+$font-size-logo: 200%;
+
+/* all divs float by default */
+div {
+  float: left;
+  max-width: inherit;
+}
+
+/* Maybe use this for sectioning? TODO - delete?*/
 .div-32 {
-  font-weight:bold;
+
 }
 
 .div-16 {
@@ -15,6 +25,16 @@
 }
 
 
+/* Logo css - header displays on everypage so include everywhere */
+.logo a {
+  text-decoration: none;
+  background-color: white;
+  &:link, &:visited, &:hover, &:active {
+    background-color: white;
+    color: black;
+    font-size: $font-size-logo;
+  }
+}
 
 /* tables / rows / columns */
 

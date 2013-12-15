@@ -30,9 +30,7 @@ class PatientsController < ApplicationController
   # POST /patients
   # POST /patients.json
   def create
-    puts "here!"
     @patient = Patient.new(patient_params)
-    puts @patient.inspect
 
     respond_to do |format|
       if @patient.save

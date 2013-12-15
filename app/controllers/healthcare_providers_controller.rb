@@ -4,12 +4,14 @@ class HealthcareProvidersController < ApplicationController
   # GET /healthcare_providers
   # GET /healthcare_providers.json
   def index
+    puts "@@@ index"
     @healthcare_providers = HealthcareProvider.all
   end
 
   # GET /healthcare_providers/1
   # GET /healthcare_providers/1.json
   def show
+    puts "@@@ show"
   end
 
   # GET /healthcare_providers/new
@@ -69,6 +71,6 @@ class HealthcareProvidersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def healthcare_provider_params
-      params.require(:healthcare_provider).permit(:name, :type)
+      params.require(:healthcare_provider).permit(:name, :provider_type)
     end
 end

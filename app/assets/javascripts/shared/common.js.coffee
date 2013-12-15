@@ -1,3 +1,4 @@
+# Calculates age from birthday date given
 # TODO: Can this be optimized? Does it need to be?
 window.calculateAge = (dob) ->
   

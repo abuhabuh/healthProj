@@ -1,13 +1,15 @@
-<div>
-  <div><h2> Health DB Header </h2></div>
+<!-- Logo banner -->
+<div style="clear:left;width:100%">
+  <div class="logo"> <%= link_to('Health DB Header', root_path) %> </div>
 
   <% if user_signed_in? %>
-    <div>
+    <div style="float:right;">
       <%= link_to('Logout', destroy_user_session_path, :method => :delete) %>        
     </div>
   <% else %>
-    <div>
+    <div style="float:right;">
       <%= link_to('Login', new_user_session_path)  %>  
     </div>
   <% end %>
 </div>
+
