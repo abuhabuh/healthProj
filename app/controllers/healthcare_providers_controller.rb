@@ -1,10 +1,10 @@
-class HealthCareProvidersController < ApplicationController
+class HealthcareProvidersController < ApplicationController
   before_action :set_healthcare_provider, only: [:show, :edit, :update, :destroy]
 
   # GET /healthcare_providers
   # GET /healthcare_providers.json
   def index
-    @healthcare_providers = HealthCareProvider.all
+    @healthcare_providers = HealthcareProvider.all
   end
 
   # GET /healthcare_providers/1
@@ -14,7 +14,7 @@ class HealthCareProvidersController < ApplicationController
 
   # GET /healthcare_providers/new
   def new
-    @healthcare_provider = HealthCareProvider.new
+    @healthcare_provider = HealthcareProvider.new
   end
 
   # GET /healthcare_providers/1/edit
@@ -24,11 +24,11 @@ class HealthCareProvidersController < ApplicationController
   # POST /healthcare_providers
   # POST /healthcare_providers.json
   def create
-    @healthcare_provider = HealthCareProvider.new(healthcare_provider_params)
+    @healthcare_provider = HealthcareProvider.new(healthcare_provider_params)
 
     respond_to do |format|
       if @healthcare_provider.save
-        format.html { redirect_to @healthcare_provider, notice: 'Health care provider was successfully created.' }
+        format.html { redirect_to @healthcare_provider, notice: 'Healthcare provider was successfully created.' }
         format.json { render action: 'show', status: :created, location: @healthcare_provider }
       else
         format.html { render action: 'new' }
@@ -42,7 +42,7 @@ class HealthCareProvidersController < ApplicationController
   def update
     respond_to do |format|
       if @healthcare_provider.update(healthcare_provider_params)
-        format.html { redirect_to @healthcare_provider, notice: 'Health care provider was successfully updated.' }
+        format.html { redirect_to @healthcare_provider, notice: 'Healthcare provider was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: 'edit' }
@@ -64,7 +64,7 @@ class HealthCareProvidersController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_healthcare_provider
-      @healthcare_provider = HealthCareProvider.find(params[:id])
+      @healthcare_provider = HealthcareProvider.find(params[:id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

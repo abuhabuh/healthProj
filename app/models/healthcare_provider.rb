@@ -1,2 +1,2 @@
-class HealthCareProvider < ActiveRecord::Base
+class HealthcareProvider < ActiveRecord::Base
 end

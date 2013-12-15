@@ -1,2 +1,2 @@
-module HealthCareProvidersHelper
+module HealthcareProvidersHelper
 end
