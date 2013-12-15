@@ -1,0 +1,29 @@
+<h1>Listing health_care_providers</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @health_care_providers.each do |health_care_provider| %>
+      <tr>
+        <td><%= health_care_provider.name %></td>
+        <td><%= health_care_provider.type %></td>
+        <td><%= link_to 'Show', health_care_provider %></td>
+        <td><%= link_to 'Edit', edit_health_care_provider_path(health_care_provider) %></td>
+        <td><%= link_to 'Destroy', health_care_provider, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Health care provider', new_health_care_provider_path %>

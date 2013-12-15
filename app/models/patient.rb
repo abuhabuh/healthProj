@@ -5,4 +5,5 @@ class Patient < ActiveRecord::Base
 
   # Validation
   validates_inclusion_of :gender, :in => @@enum_sex
+  validates_uniqueness_of :medical_record_id
 end

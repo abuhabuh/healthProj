@@ -1,4 +1,6 @@
 HealthProj::Application.routes.draw do
+  resources :health_care_providers
+
   # *note: always keep this on top
   root to: 'home#index'
 
