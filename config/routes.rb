@@ -1,10 +1,12 @@
 HealthProj::Application.routes.draw do
-  resources :healthcare_providers
 
   # *note: always keep this on top
   root to: 'home#index'
 
-  # Edit these routes and take out those taken over by backbone
+  # TODO: Edit these routes and take out those taken over by backbone
+  resources :healthcare_providers do
+    resources :departments
+  end
   resources :races
   resources :ethnicities
   resources :countries

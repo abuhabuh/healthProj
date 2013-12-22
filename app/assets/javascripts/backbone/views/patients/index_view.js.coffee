@@ -7,16 +7,16 @@ class HealthProj.Views.Patients.IndexView extends Backbone.View
     @options.patients.bind('reset', @addAll)
 
   addAll: () =>
+    debugger
     @options.patients.each(@addOne)
 
   addOne: (patient) =>
+    debugger
     view = new HealthProj.Views.Patients.PatientView({model : patient})
-    # TODO: tbody.append should be deleted
-    @$("tbody").append(view.render().el)
     @$(".patients-list-container-hor").append(view.render().el)
 
   render: =>
-    $(@el).html(@template(patients: @options.patients.toJSON() ))
+    $(@el).html(@template(patients: @options.patients.toJSON()))
     @addAll()
 
     return this

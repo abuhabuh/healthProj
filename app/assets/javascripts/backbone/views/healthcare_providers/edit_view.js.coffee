@@ -1,22 +1,22 @@
 HealthProj.Views.HealthcareProviders ||= {}
 
 class HealthProj.Views.HealthcareProviders.EditView extends Backbone.View
-  template : JST["backbone/templates/healthcare_providers/edit"]
+  template: JST["backbone/templates/healthcare_providers/edit"]
 
-  events :
+  events:
     "submit #edit-healthcare_provider" : "update"
 
-  update : (e) ->
+  update: (e) ->
     e.preventDefault()
     e.stopPropagation()
 
     @model.save(null,
-      success : (healthcareProvider) =>
+      success: (healthcareProvider) =>
         @model = healthcareProvider
         window.location.hash = "/#{@model.id}"
     )
 
-  render : ->
+  render: ->
     $(@el).html(@template(@model.toJSON() ))
 
     this.$("form").backboneLink(@model)
