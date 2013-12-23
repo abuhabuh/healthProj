@@ -9,52 +9,56 @@ class DepartmentsController < ApplicationController
   # GET /healthcare_providers/:id/departments/:id.json
   def index
     @departments = @healthcare_provider.departments.all
-    puts "@@@ getting departments"
-    puts @departments.inspect()
     respond_with(@departments)
   end
 
-  # GET /departments/1
-  # GET /departments/1.json
+  # GET /healthcare_providers/:id/departments/1
+  # GET /healthcare_providers/:id/departments/1.json
   def show
   end
 
-
-  # POST /departments
-  # POST /departments.json
+  # POST /healthcare_providers/:id/departments
+  # POST /healthcare_providers/:id/departments.json
   def create
-    puts "@@@ here"
-    puts "@@@ dpt params: " + department_params.inspect()
     @department = Department.new(department_params)
 
     respond_to do |format|
       if @department.save
-        format.html { redirect_to @department, notice: 'Department was successfully created.' }
-        format.json { render action: 'show', status: :created, location: @department }
+        # TODO: log improper html requests here
+        format.html { redirect_to @department,
+          notice: 'Department was successfully created.' }
+        format.json { render json: @department }
       else
+        # TODO: process error handling
         format.html { render action: 'new' }
-        format.json { render json: @department.errors, status: :unprocessable_entity }
+        format.json { render text: "Unable to create department", status: :unprocessable_entity}
       end
     end
 
   end
 
-  private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_department
-      @country = Department.find(params[:id])
+  # DELETE /healthcare_providers/:id/departments/1
+  # DELETE /healthcare_providers/:id/departments/1.json
+  def destroy
+    # Using normal params because not passed in through user input
+    @department = Department.find(params[:id])
+    @department.destroy
+    respond_to do |format|
+      format.html { redirect_to patients_url }
+      format.json { head :no_content }
     end
+  end
 
+  private
     # Never trust parameters from the scary internet, only allow the white list through.
     def department_params
-      print "@@@ department_params - function"
-      print params.inspect()
+      puts "@@@ department_params - function"
+      puts params.inspect()
       params.require(:department).permit(:name, :healthcare_provider_id)
     end
 
     def load_healthcare_provider
       @healthcare_provider = HealthcareProvider.find(params[:healthcare_provider_id])
     end
-
 
 end

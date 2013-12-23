@@ -1,3 +1,22 @@
 // Place all the styles related to the HealthcareProviders controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+.healthcare-provider-detailed-container {
+  float: left;
+  clear: both;
+  padding: 0% 2%;
+}
+
+.healthcare-provider-name {
+  float: left;
+  clear: both;
+  padding: 15px 0% 5px 0%;
+}
+
+.healthcare-provider-type {
+  float: left;
+  clear: both;
+  padding: 5px 0%;
+}
+

@@ -1,29 +1,30 @@
-<p>
-  <b>Name:</b>
-  <%= name %>
-</p>
+<div class='healthcare-provider-detailed-container'>
 
-<p>
-  <b>Provider Type:</b>
-  <%= provider_type %>
-</p>
-
-<div class='departments'></div>
-
-
-<p> Add Department </p>
-
-<form id="add-department" name="add_department">
-  <div class="field">
-    <label for="name"> name:</label>
-    <input type="text" name="name" id="name" value="" >
+  <div class='healthcare-provider-name page-title-detail'>
+    <%= name %>
+  </div>
+  <div class='healthcare-provider-type'>
+    Type: <%= provider_type %>
   </div>
 
-  <div class="actions">
-    <input type="submit" value="Add Department" />
+  <div class='departments' style='float: left; clear: both'></div>
+
+  <div>
+    <p> Add Department </p>
+
+    <form id="add-department" name="add_department">
+      <div class="field">
+        <label for="name"> name:</label>
+        <input type="text" name="name" id="name" value="" >
+      </div>
+
+      <div class="actions">
+        <input type="submit" value="Add Department" />
+      </div>
+
+    </form>
+
+
+    <a href="#/index">Back</a>
   </div>
-
-</form>
-
-
-<a href="#/index">Back</a>
+</div>

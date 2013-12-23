@@ -2,7 +2,7 @@
 
 /* Constants: TODO break constants out into another file so can be shared 
    to more files? */
-$font-size-logo: 200%;
+$font-size-logo: 2em;
 
 /* all divs float by default */
 div {
@@ -25,6 +25,13 @@ div {
 }
 
 
+/* font weights and designs */
+.page-title-detail {
+  font-weight: bold;
+  font-size: 2em;
+}
+
+
 /* Logo css - header displays on everypage so include everywhere */
 .logo a {
   text-decoration: none;
@@ -38,6 +45,7 @@ div {
 
 /* tables / rows / columns */
 
-.row_element_right_padded {
+.row-element-right-padded {
   margin-right: 25px;
 }
+

@@ -12,6 +12,7 @@ HealthProj::Application.routes.draw do
   resources :countries
   resources :languages
   resources :patients
+  resources :departments
   devise_for :users
 
   # Standard page routes

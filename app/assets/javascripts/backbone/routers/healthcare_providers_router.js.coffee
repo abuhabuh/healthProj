@@ -11,6 +11,7 @@ class HealthProj.Routers.HealthcareProvidersRouter extends Backbone.Router
     ".*"        : "index"
 
   newHealthcareProvider: ->
+    debugger
     @view = new HealthProj.Views.HealthcareProviders.NewView(collection: @healthcareProviders)
     $("#healthcare_providers").html(@view.render().el)
 

@@ -1,49 +1,65 @@
 HealthProj.Views.HealthcareProviders ||= {}
 
-
 # Health Provider view class
-# - renders Departments views as well
+#
+# - Renders Departments views as well
+# - Initializes departments collection for the model if it doesn't exist
 
 class HealthProj.Views.HealthcareProviders.ShowView extends Backbone.View
   template: JST["backbone/templates/healthcare_providers/show"]
-  deptTemplate: JST["backbone/templates/departments/department"]
   deptCollectionTemplate: JST["backbone/templates/departments/index"]
 
   events:
     "submit #add-department" : "handleDepartmentCreate"
 
   initialize: (options) ->
+    if not @model.departments
+      @model.departments = new HealthProj.Collections.DepartmentsCollection()
+      @model.departments.url = '/healthcare_providers/' + @model.id + '/departments/'
+    @_bindEventsOnDepartments()
     @model.departments.fetch()
-    @model.departments.on('reset', @_renderAllDepartments, this)
-    @model.departments.on('add', @_addDepartment, this)
-    @model.departments.on('remove', @_addDepartment, this)
 
   render: ->
     $(@el).html(@template(@model.toJSON()))
     return this
 
-  handleDepartmentCreate: ->
-    debugger;
+  handleDepartmentCreate: (e) ->
+    e.preventDefault()
+    e.stopPropagation()
+
+    # add department to collection
     department = new HealthProj.Models.Department()
-    department.set("name", "tom")
-    department.set("healthcare_provider_id", @model.id)
-    department.save(null,
-      success: (department) =>
-        alert("saved");
-        window.location.hash = "/#{@model.id}"
+
+    $formEl = @$("#add-department")
+    deptName = $formEl.find("#name").val()
+    department.set({name: deptName}, {silent: true})
+    department.set({healthcare_provider_id: @model.id}, {silent: true})
+
+    # TODO: fix validation
+    # department.on("invalid", @_setDeptValidationError)
+    # set validation error action for department
+
+    @model.departments.create(department.toJSON(),
+      error: (department, response, options) =>
+        debugger
+      wait: true
     )
 
   # Departments Collection change events
-  _renderAllDepartments: () ->
-    debugger
+  _bindEventsOnDepartments: () ->
+    @model.departments.on('reset', @_renderAllDepartments, this)
+    @model.departments.on('add', @_addDepartment, this)
+
+  _renderDepartmentContainer: () ->
     @$(".departments").html(@deptCollectionTemplate())
+
+  _renderAllDepartments: () ->
+    @_renderDepartmentContainer()
     @model.departments.each(@_addDepartment, this)
 
   _addDepartment: (newDept) ->
+    departmentView = new HealthProj.Views.Departments.DepartmentView({model : newDept})
+    @$(".departments-list-container").append(departmentView.render().el)
+
+  _setDeptValidationError: (model, error) ->
     debugger
-    @$(".departments-list-container-hor").append(@deptTemplate(newDept.toJSON()))
-
-  _removeDepartment: (removedDept, deptCollection, options) ->
-    debugger
-
-
