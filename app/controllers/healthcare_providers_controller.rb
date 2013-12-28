@@ -29,7 +29,7 @@ class HealthcareProvidersController < ApplicationController
     respond_to do |format|
       if @healthcare_provider.save
         format.html { redirect_to @healthcare_provider, notice: 'Healthcare provider was successfully created.' }
-        format.json { render action: 'show', status: :created, location: @healthcare_provider }
+        format.json { render json: @healthcare_provider }
       else
         format.html { render action: 'new' }
         format.json { render json: @healthcare_provider.errors, status: :unprocessable_entity }

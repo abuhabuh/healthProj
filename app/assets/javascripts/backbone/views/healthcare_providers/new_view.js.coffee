@@ -20,6 +20,8 @@ class HealthProj.Views.HealthcareProviders.NewView extends Backbone.View
 
     @model.unset("errors")
     @collection.create(@model.toJSON(),
+
+      # handle errors & success
       success: (healthcare_provider) =>
         @model = healthcare_provider
         window.location.hash = "/#{@model.id}"

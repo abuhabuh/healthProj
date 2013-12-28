@@ -6,7 +6,8 @@ class HealthProj.Views.HealthcareProviders.HealthcareProviderView extends Backbo
   events:
     "click .destroy" : "destroy"
 
-  tagName: "tr"
+  tagName: "div"
+  className: "table-row"
 
   destroy: () ->
     @model.destroy()

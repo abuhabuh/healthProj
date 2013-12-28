@@ -11,7 +11,7 @@ class HealthProj.Views.HealthcareProviders.IndexView extends Backbone.View
 
   addOne: (healthcareProvider) =>
     view = new HealthProj.Views.HealthcareProviders.HealthcareProviderView({model : healthcareProvider})
-    @$("tbody").append(view.render().el)
+    @$(".healthcare-providers-list").append(view.render().el)
 
   render: =>
     $(@el).html(@template(healthcareProviders: @options.healthcareProviders.toJSON() ))

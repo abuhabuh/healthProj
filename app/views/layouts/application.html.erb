@@ -18,11 +18,12 @@
 
   <body>
 
-    <div style="max-width:960px">
+    <!-- <div style="max-width:960px"> -->
+    <div>
       <%= render 'layouts/header' %>
       <%= render 'layouts/main_nav' %>
 
-      <div style="clear:left;"> <!-- div sets content on new line -->
+      <div style="clear:both;"> <!-- div sets content on new line -->
         <%= yield %>
       </div>
     </div>

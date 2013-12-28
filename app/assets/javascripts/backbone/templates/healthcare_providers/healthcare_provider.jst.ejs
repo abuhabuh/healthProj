@@ -1,6 +1,7 @@
-<td><%= name %></td>
-<td><%= provider_type %></td>
-
-<td><a href="#/<%= id %>">Show</td>
-<td><a href="#/<%= id %>/edit">Edit</td>
-<td><a href="#/<%= id %>/destroy" class="destroy">Destroy</a></td>
+<div class='row-element-right'>
+  <a href="#/<%= id %>/destroy" class="destroy">Destroy</a>
+</div>
+<div class='row-element-right'> <a href="#/<%= id %>/edit">Edit</a> </div>
+<div class='row-element-right'> <a href="#/<%= id %>">Show</a> </div>
+<div class='row-element-right'> <%= provider_type %></div>
+<div class='row-element-right'> <%= name %></div>

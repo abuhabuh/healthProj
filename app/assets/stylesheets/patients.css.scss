@@ -5,11 +5,10 @@
 
 .patients-list-container-hor {
   float: left;
-  width: 100%;
 }
 
 .patient-container-hor {
-  width: 100%;
+  clear: both;
 }
   .patient-main-hor {
     @extend .patiend-container-hor;

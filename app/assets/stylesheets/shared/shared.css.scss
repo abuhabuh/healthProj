@@ -10,25 +10,20 @@ div {
   max-width: inherit;
 }
 
-/* Maybe use this for sectioning? TODO - delete?*/
-.div-32 {
-
-}
-
-.div-16 {
-
-}
-
-.div-8 {
-
-
-}
-
-
 /* font weights and designs */
-.page-title-detail {
+.font-page-title {
   font-weight: bold;
   font-size: 2em;
+}
+.font-table-row-title {
+  font-weight: bold;
+}
+
+/* common blocks */
+.page-title {
+  float: left;
+  clear: both;
+  padding: 15px 0% 5px 0%;
 }
 
 
@@ -44,8 +39,19 @@ div {
 }
 
 /* tables / rows / columns */
-
-.row-element-right-padded {
-  margin-right: 25px;
+.table-row {
+  clear: both;
 }
 
+.row-element-right {
+  float: right;
+  padding-right: 25px;
+}z
+.row-element-left {
+
+}
+
+/* login / logout */
+.login_link {
+  padding-left: 15px;
+}

@@ -5,7 +5,7 @@ class PatientsController < ApplicationController
   before_action :set_patient, only: [:show, :edit, :update, :destroy]
   respond_to :html, :xml, :json
 
-  # GET /patients
+  # GET /patients - returns html page to render patients view
   # GET /patients.json
   def index
     @patients = Patient.all

@@ -7,11 +7,9 @@ class HealthProj.Views.Patients.IndexView extends Backbone.View
     @options.patients.bind('reset', @addAll)
 
   addAll: () =>
-    debugger
     @options.patients.each(@addOne)
 
   addOne: (patient) =>
-    debugger
     view = new HealthProj.Views.Patients.PatientView({model : patient})
     @$(".patients-list-container-hor").append(view.render().el)
 
