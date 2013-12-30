@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131215011803) do
+ActiveRecord::Schema.define(version: 20131230063029) do
 
   create_table "countries", force: true do |t|
     t.string   "name"
@@ -29,8 +29,8 @@ ActiveRecord::Schema.define(version: 20131215011803) do
     t.datetime "updated_at"
   end
 
-  add_index "departments", ["healthcare_provider_id"], name: "index_departments_on_healthcare_provider_id", using: :btree
-  add_index "departments", ["name", "healthcare_provider_id"], name: "index_departments_on_name_and_healthcare_provider_id", unique: true, using: :btree
+  add_index "departments", ["healthcare_provider_id"], name: "index_departments_on_health_care_provider_id", using: :btree
+  add_index "departments", ["name", "healthcare_provider_id"], name: "index_departments_on_name_and_health_care_provider_id", unique: true, using: :btree
 
   create_table "ethnicities", force: true do |t|
     t.string   "name"
@@ -42,7 +42,7 @@ ActiveRecord::Schema.define(version: 20131215011803) do
 
   create_table "healthcare_providers", force: true do |t|
     t.string   "name"
-    t.integer  "type"
+    t.integer  "provider_type"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -90,6 +90,12 @@ ActiveRecord::Schema.define(version: 20131215011803) do
   end
 
   add_index "races", ["name"], name: "index_races_on_name", unique: true, using: :btree
+
+  create_table "surgeon_specialties", force: true do |t|
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "users", force: true do |t|
     t.string   "email",                  default: "", null: false

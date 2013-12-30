@@ -39,3 +39,17 @@ end
 Country.create!(:name=> 'United States', :code => 'US')
 Country.create!(:name=> 'Canada', :code => 'CA')
 Country.create!(:name=> 'China', :code => 'CN')
+
+# Add Surgeon Specialties
+SurgeonSpecialty.delete_all
+SurgeonSpecialty.create!(:name=> 'General Surgery')
+SurgeonSpecialty.create!(:name=> 'Vascular')
+SurgeonSpecialty.create!(:name=> 'Thoracic')
+SurgeonSpecialty.create!(:name=> 'Cardiac')
+SurgeonSpecialty.create!(:name=> 'Orthopedics')
+SurgeonSpecialty.create!(:name=> 'Neurosurgery')
+SurgeonSpecialty.create!(:name=> 'Urology')
+SurgeonSpecialty.create!(:name=> 'Otalarynology')
+SurgeonSpecialty.create!(:name=> 'Plastics')
+SurgeonSpecialty.create!(:name=> 'Gynecology')
+SurgeonSpecialty.create!(:name=> 'Interventional Radiology')

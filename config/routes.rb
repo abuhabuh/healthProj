@@ -1,5 +1,7 @@
 HealthProj::Application.routes.draw do
 
+  resources :surgeon_specialties
+
   # *note: always keep this on top
   root to: 'home#index'
 

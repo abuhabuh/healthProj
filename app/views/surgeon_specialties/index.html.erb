@@ -1,0 +1,27 @@
+<h1>Listing surgeon_specialties</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @surgeon_specialties.each do |surgeon_specialty| %>
+      <tr>
+        <td><%= surgeon_specialty.name %></td>
+        <td><%= link_to 'Show', surgeon_specialty %></td>
+        <td><%= link_to 'Edit', edit_surgeon_specialty_path(surgeon_specialty) %></td>
+        <td><%= link_to 'Destroy', surgeon_specialty, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Surgeon specialty', new_surgeon_specialty_path %>
