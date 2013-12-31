@@ -1,9 +1,9 @@
 class Patient < ActiveRecord::Base
 
   # Static class variables
-  @@enum_sex = %w(male female)
+  @@ENUM_SEX = %w(male female)
 
   # Validation
-  validates_inclusion_of :gender, :in => @@enum_sex
+  validates_inclusion_of :gender, :in => @@ENUM_SEX
   validates_uniqueness_of :medical_record_id
 end

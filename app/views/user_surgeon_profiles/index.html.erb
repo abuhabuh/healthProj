@@ -1,0 +1,29 @@
+<h1>Listing user_surgeon_profiles</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Belongs to</th>
+      <th>Belongs to</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @user_surgeon_profiles.each do |user_surgeon_profile| %>
+      <tr>
+        <td><%= user_surgeon_profile.belongs_to %></td>
+        <td><%= user_surgeon_profile.belongs_to %></td>
+        <td><%= link_to 'Show', user_surgeon_profile %></td>
+        <td><%= link_to 'Edit', edit_user_surgeon_profile_path(user_surgeon_profile) %></td>
+        <td><%= link_to 'Destroy', user_surgeon_profile, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New User surgeon profile', new_user_surgeon_profile_path %>

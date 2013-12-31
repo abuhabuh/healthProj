@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131230063029) do
+ActiveRecord::Schema.define(version: 20131230174204) do
 
   create_table "countries", force: true do |t|
     t.string   "name"
@@ -97,6 +97,16 @@ ActiveRecord::Schema.define(version: 20131230063029) do
     t.datetime "updated_at"
   end
 
+  create_table "user_surgeon_profiles", force: true do |t|
+    t.integer  "user_id"
+    t.integer  "surgeon_specialty_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "user_surgeon_profiles", ["surgeon_specialty_id"], name: "user_surgeon_profiles_surgeon_specialty_id_fk", using: :btree
+  add_index "user_surgeon_profiles", ["user_id"], name: "user_surgeon_profiles_user_id_fk", using: :btree
+
   create_table "users", force: true do |t|
     t.string   "email",                  default: "", null: false
     t.string   "encrypted_password",     default: "", null: false
@@ -110,15 +120,24 @@ ActiveRecord::Schema.define(version: 20131230063029) do
     t.string   "last_sign_in_ip"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "role"
+    t.string   "first_name"
+    t.string   "last_name"
+    t.string   "middle_initial"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
+
+  add_foreign_key "departments", "healthcare_providers", name: "departments_healthcare_provider_id_fk"
 
   add_foreign_key "languages", "countries", name: "languages_country_id_fk"
 
   add_foreign_key "patients", "ethnicities", name: "patients_ethnicity_id_fk"
   add_foreign_key "patients", "languages", name: "patients_language_id_fk"
   add_foreign_key "patients", "races", name: "patients_race_id_fk"
+
+  add_foreign_key "user_surgeon_profiles", "surgeon_specialties", name: "user_surgeon_profiles_surgeon_specialty_id_fk"
+  add_foreign_key "user_surgeon_profiles", "users", name: "user_surgeon_profiles_user_id_fk"
 
 end

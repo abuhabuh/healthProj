@@ -1,0 +1,35 @@
+<div class='page-title font-page-title'>
+  Hello <%= current_user.first_name %>
+</div>
+
+<!-- Display Surgeon Profile info as applicable -->
+<% if current_user.is_surgeon() and not @user_surgeon_profile.nil? %>
+  <div style='clear:both'>
+    Surgeon Provile: __get_specialty__ <edit>
+  </div>
+<% elsif current_user.is_surgeon() and @user_surgeon_profile.nil? %>
+  <div style='clear:both'>
+    <%= form_for current_user, :url => user_registration_path, :html => { :method => :put} do |f| %>
+
+      <div style='clear: both'>
+        <%= f.select :role, User.get_available_roles() %>
+        <%= f.label :role %>
+      </div>
+
+      <div style='clear: both'>
+        <%= f.submit "Update" %>
+      </div>
+    <% end %>
+  </div>
+<% end %>
+
+<!-- Display Admin Profile info as applicable -->
+<% if current_user.is_admin() %>
+  <div style='clear:both'>
+    Administrator
+  </div>
+<% end %>
+
+<div style='clear:both'>
+  <%= link_to 'edit profile', edit_user_registration_path %>
+</div>

@@ -52,8 +52,6 @@ class DepartmentsController < ApplicationController
   private
     # Never trust parameters from the scary internet, only allow the white list through.
     def department_params
-      puts "@@@ department_params - function"
-      puts params.inspect()
       params.require(:department).permit(:name, :healthcare_provider_id)
     end
 

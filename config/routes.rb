@@ -1,5 +1,9 @@
 HealthProj::Application.routes.draw do
 
+  get "registrations/update"
+  get "users/show"
+  resources :user_surgeon_profiles
+
   resources :surgeon_specialties
 
   # *note: always keep this on top
@@ -15,7 +19,8 @@ HealthProj::Application.routes.draw do
   resources :languages
   resources :patients
   resources :departments
-  devise_for :users
+  devise_for :users, :controllers => { :registrations => "registrations" }
+  resources :users
 
   # Standard page routes
   get '/admin', to: 'admin#index'
