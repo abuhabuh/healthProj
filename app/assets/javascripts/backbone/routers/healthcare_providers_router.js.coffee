@@ -19,7 +19,6 @@ class HealthProj.Routers.HealthcareProvidersRouter extends Backbone.Router
     $("#healthcare_providers").html(@view.render().el)
 
   show: (id) ->
-    debugger
     healthcareProvider = @healthcareProviders.get(id)
 
     @view = new HealthProj.Views.HealthcareProviders.ShowView(model: healthcareProvider)

@@ -9,14 +9,43 @@
 
 .patient-container-hor {
   clear: both;
+  text-align: left;
+  min-width: 600px;
+  padding-top: 15px;
 }
   .patient-main-hor {
-    @extend .patiend-container-hor;
     font-weight: bold;
   }
+    .patient-main-hor .row-name {
+      width: 24%;
+      padding-left: 1%;
+    }
+    .patient-main-hor .row-mrn {
+      width: 24%;
+      padding-left: 1%;
+    }
+    .patient-main-hor .row-dob {
+      width: 24%;
+      padding-left: 1%;
+    }
+    .patient-main-hor .row-age {
+      width: 11%;
+      padding-left: 1%;
+    }
+    .patient-main-hor .row-sex {
+      width: 12%;
+      padding-left: 1%;
+    }
+
   .patient-detail-hor {
-    @extend .patient-container-hor;
     font-weight: normal;
+    padding-left: 2%;
+    width: 98%;
   }
-
-
+    .patient-detail-hor .column1 {
+      width: 47%;
+      padding-right: 3%;
+    }
+    .patient-detail-hor .column2 {
+      width: 50%;
+    }

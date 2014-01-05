@@ -28,8 +28,6 @@ class HealthProj.Models.Patient extends Backbone.Model
     'preferred_language': {'primary': false, 'tab_ind': 16}
   }
 
-
-
 class HealthProj.Collections.PatientsCollection extends Backbone.Collection
   model: HealthProj.Models.Patient
   url: '/patients'

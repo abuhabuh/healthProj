@@ -7,7 +7,7 @@ class HealthProj.Views.HealthcareProviders.HealthcareProviderView extends Backbo
     "click .destroy" : "destroy"
 
   tagName: "div"
-  className: "table-row"
+  className: "healthcare-provider-container-hor"
 
   destroy: () ->
     @model.destroy()

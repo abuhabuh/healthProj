@@ -1,0 +1,59 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>User id:</strong>
+  <%= @surgical_profile.user_id %>
+</p>
+
+<p>
+  <strong>Patient id:</strong>
+  <%= @surgical_profile.patient_id %>
+</p>
+
+<p>
+  <strong>Patient status:</strong>
+  <%= @surgical_profile.patient_status %>
+</p>
+
+<p>
+  <strong>Elective surgery:</strong>
+  <%= @surgical_profile.elective_surgery %>
+</p>
+
+<p>
+  <strong>Principal procedure:</strong>
+  <%= @surgical_profile.principal_procedure %>
+</p>
+
+<p>
+  <strong>Cpt code:</strong>
+  <%= @surgical_profile.cpt_code %>
+</p>
+
+<p>
+  <strong>Origin status:</strong>
+  <%= @surgical_profile.origin_status %>
+</p>
+
+<p>
+  <strong>Hospital admission date:</strong>
+  <%= @surgical_profile.hospital_admission_date %>
+</p>
+
+<p>
+  <strong>Operation date:</strong>
+  <%= @surgical_profile.operation_date %>
+</p>
+
+<p>
+  <strong>Anesthesia technique:</strong>
+  <%= @surgical_profile.anesthesia_technique %>
+</p>
+
+<p>
+  <strong>Encounter number:</strong>
+  <%= @surgical_profile.encounter_number %>
+</p>
+
+<%= link_to 'Edit', edit_surgical_profile_path(@surgical_profile) %> |
+<%= link_to 'Back', surgical_profiles_path %>

@@ -1,17 +1,5 @@
-<div class='patient-main-hor'>
-  <div class='row-element-right'>
-    <%= gender %>
-  </div>
-  <div class='row-element-right'>
-    <%= calculateAge(date_of_birth) %>
-  </div>
-  <div class='row-element-right'>
-    DOB: <%= date_of_birth %>
-  </div>
-  <div class='row-element-right'>
-    MRN: <%= medical_record_id %>
-  </div>
-  <div class='row-element-right'>
+<div class='patient-main-hor' style='clear:both'>
+  <div class='row-name'>
     <% if (last_name && last_name.trim != '') { %>
       <%= last_name %>,
     <% } %>
@@ -20,25 +8,41 @@
       <%= middle_initial %>.
     <% } %>
   </div>
+  <div class='row-mrn'>
+    MRN: <%= medical_record_id %>
+  </div>
+  <div class='row-dob'>
+    DOB: <%= date_of_birth %>
+  </div>
+  <div class='row-age'>
+    Age: <%= calculateAge(date_of_birth) %>
+  </div>
+  <div class='row-sex'>
+    <%= gender %>
+  </div>
 </div>
 
-<div class='patient-detail-hor'>
-  <div class='row-element-right'>
-    <a href='#/<%= id %>/edit'>Edit</a>
+<div class='patient-detail-hor' style='clear:both'>
+  <div class='column1'>
+    <div style='clear:both'>
+      Address 1: <%= address1 %>
+    </div>
+    <div style='clear:both'>
+      Address 2: <%= address2 %>
+    </div>
+    <div style='clear:both'>
+      City: <%= city %>
+    </div>
+    <div style='clear:both'>
+      State: <%= state %>
+    </div>
   </div>
-  <div class='row-element-right'>
-    <%= home_phone %>
-  </div>
-  <div class='row-element-right'>
-    <%= state %>
-  </div>
-  <div class='row-element-right'>
-    <%= city %>
-  </div>
-  <div class='row-element-right'>
-    <%= address2 %>
-  </div>
-  <div class='row-element-right'>
-    <%= address1 %>
+  <div class='column2'>
+    <div style='clear:both'>
+      Home Phone: <%= home_phone %>
+    </div>
+    <div style='clear:both'>
+      <a href='#/<%= id %>/edit'>Edit</a>
+    </div>
   </div>
 </div>

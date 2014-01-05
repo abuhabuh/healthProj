@@ -5,8 +5,6 @@ class HealthProj.Models.HealthcareProvider extends Backbone.Model
     name: null
     provider_type: null
 
-  initialize: (options) ->
-
 class HealthProj.Collections.HealthcareProvidersCollection extends Backbone.Collection
   model: HealthProj.Models.HealthcareProvider
   url: '/healthcare_providers'

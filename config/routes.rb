@@ -1,4 +1,8 @@
 HealthProj::Application.routes.draw do
+  # *note: always keep this on top
+  root to: 'home#index'
+
+  resources :surgical_profiles
 
   get "registrations/update"
   get "users/show"
@@ -6,8 +10,6 @@ HealthProj::Application.routes.draw do
 
   resources :surgeon_specialties
 
-  # *note: always keep this on top
-  root to: 'home#index'
 
   # TODO: Edit these routes and take out those taken over by backbone
   resources :healthcare_providers do

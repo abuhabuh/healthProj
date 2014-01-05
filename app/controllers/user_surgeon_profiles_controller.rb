@@ -28,7 +28,7 @@ class UserSurgeonProfilesController < ApplicationController
 
     respond_to do |format|
       if @user_surgeon_profile.save
-        format.html { redirect_to @user_surgeon_profile, notice: 'User surgeon profile was successfully created.' }
+        format.html { redirect_to :back, notice: 'User surgeon profile was successfully created.' }
         format.json { render action: 'show', status: :created, location: @user_surgeon_profile }
       else
         format.html { render action: 'new' }
@@ -69,6 +69,6 @@ class UserSurgeonProfilesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def user_surgeon_profile_params
-      params.require(:user_surgeon_profile).permit(:belongs_to, :belongs_to)
+      params.permit(:surgeon_specialty_id, :user_id)
     end
 end

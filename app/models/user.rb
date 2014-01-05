@@ -20,10 +20,11 @@ class User < ActiveRecord::Base
 
   # Instance methods
   def is_surgeon
-    return role == @@ROLES[0]
+    return role == @@ROLES[0] # TODO: eliminate 0 hard coding?
   end
 
   def is_admin
     return role == @@ROLES[1]
   end
+
 end

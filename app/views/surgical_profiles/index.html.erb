@@ -1,0 +1,43 @@
+<h1>Listing surgical_profiles</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Surgeon</th>
+      <th>Patient</th>
+      <th>Patient status</th>
+      <th>Elective surgery</th>
+      <th>Principal procedure</th>
+      <th>Cpt code</th>
+      <th>Origin status</th>
+      <th>Hospital admission date</th>
+      <th>Operation date</th>
+      <th>Anesthesia technique</th>
+      <th>Encounter number</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @surgical_profiles.each do |surgical_profile| %>
+      <tr>
+        <td><%= surgical_profile.user_id %></td>
+        <td><%= surgical_profile.patient_id %></td>
+        <td><%= surgical_profile.patient_status %></td>
+        <td><%= surgical_profile.elective_surgery %></td>
+        <td><%= surgical_profile.principal_procedure %></td>
+        <td><%= surgical_profile.cpt_code %></td>
+        <td><%= surgical_profile.origin_status %></td>
+        <td><%= surgical_profile.hospital_admission_date %></td>
+        <td><%= surgical_profile.operation_date %></td>
+        <td><%= surgical_profile.anesthesia_technique %></td>
+        <td><%= surgical_profile.encounter_number %></td>
+        <td><%= link_to 'Show', surgical_profile %></td>
+        <td><%= link_to 'Edit', edit_surgical_profile_path(surgical_profile) %></td>
+        <td><%= link_to 'Destroy', surgical_profile, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

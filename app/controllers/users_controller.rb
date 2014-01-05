@@ -6,7 +6,14 @@ class UsersController < ApplicationController
     # If surgeon, get user's surgeon profile (may be nil if surgeon profile
     #   is not setup yet)
     if current_user.is_surgeon()
-      @user_surgeon_profile = UserSurgeonProfile.find_by_user_id(user_params[:id])
+      @user_surgeon_profile =
+        UserSurgeonProfile.find_by_user_id(user_params[:id])
+      @surgeon_specialty_name = 
+        SurgeonSpecialty.find(@user_surgeon_profile.surgeon_specialty_id).name
+      # TODO - don't load this every time
+      @specialties_list = Array.new
+      surgeon_specialties = SurgeonSpecialty.all
+      surgeon_specialties.map { |specialty| @specialties_list.push([specialty.name, specialty.id])}
     end
   end
 

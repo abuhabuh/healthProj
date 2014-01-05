@@ -1,0 +1,61 @@
+<%= form_for(@surgical_profile) do |f| %>
+  <% if @surgical_profile.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@surgical_profile.errors.count, "error") %> prohibited this surgical_profile from being saved:</h2>
+
+      <ul>
+      <% @surgical_profile.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :user_id %><br>
+    <%= f.text_field :user_id %>
+  </div>
+  <div class="field">
+    <%= f.label :patient_id %><br>
+    <%= f.text_field :patient_id %>
+  </div>
+  <div class="field">
+    <%= f.label :patient_status %><br>
+    <%= f.select :patient_status, SurgicalProfile.get_patient_statuses_select() %>
+  </div>
+  <div class="field">
+    <%= f.label :elective_surgery %><br>
+    <%= f.select :elective_surgery, SurgicalProfile.get_elective_surgery_options_select() %>
+  </div>
+  <div class="field">
+    <%= f.label :principal_procedure %><br>
+    <%= f.text_field :principal_procedure %>
+  </div>
+  <div class="field">
+    <%= f.label :cpt_code %><br>
+    <%= f.text_field :cpt_code %>
+  </div>
+  <div class="field">
+    <%= f.label :origin_status %><br>
+    <%= f.select :origin_status, SurgicalProfile.get_origin_statuses_select() %>
+  </div>
+  <div class="field">
+    <%= f.label :hospital_admission_date %><br>
+    <%= f.datetime_select :hospital_admission_date %>
+  </div>
+  <div class="field">
+    <%= f.label :operation_date %><br>
+    <%= f.datetime_select :operation_date %>
+  </div>
+  <div class="field">
+    <%= f.label :anesthesia_technique %><br>
+    <%= f.select :anesthesia_technique, SurgicalProfile.get_anesthesia_techniques_select() %>
+  </div>
+  <div class="field">
+    <%= f.label :encounter_number %><br>
+    <%= f.number_field :encounter_number %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

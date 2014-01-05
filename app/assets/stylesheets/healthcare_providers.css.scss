@@ -3,15 +3,58 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
 
+////
+// Container for list of healthcare provider
+// - referenced in healthcare_providers/index.jst.ejs
+////
+
+.healthcare-providers-list {
+
+}
+
+
+////
+// Horizontal row entries for healthcare provider
+////
+
+.healthcare-provider-container-hor {
+  clear: both;
+  padding-top: 15px;
+  text-align: left;
+  min-width: 600px;
+}
+  .healthcare-provider-container-hor .row-name {
+    width: 49%;
+    padding-left: 1%;
+  }
+  .healthcare-provider-container-hor .row-type {
+    width: 19%;
+    padding-left: 1%;
+  }
+  .healthcare-provider-container-hor .row-edit {
+    width: 9%;
+    padding-left: 1%;
+  }
+  .healthcare-provider-container-hor .row-edit {
+    width: 9%;
+    padding-left: 1%;
+  }
+  .healthcare-provider-container-hor .row-destroy {
+    width: 9%;
+    padding-left: 1%;
+  }
+
+
+////
+// Detail view for healthcare provider
+////
+
 .healthcare-provider-detailed-container {
   float: left;
-  clear: both;
   padding: 0% 2%;
 }
 
 .healthcare-provider-type {
   float: left;
-  clear: both;
   padding: 5px 0%;
 }
-

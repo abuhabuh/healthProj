@@ -1,0 +1,27 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  user_id: 
+  patient_id: 
+  patient_status: 1
+  elective_surgery: 1
+  principal_procedure: MyString
+  cpt_code: MyString
+  origin_status: 1
+  hospital_admission_date: 2014-01-02 23:27:37
+  operation_date: 2014-01-02 23:27:37
+  anesthesia_technique: MyString
+  encounter_number: 1
+
+two:
+  user_id:
+  patient_id:
+  patient_status: 1
+  elective_surgery: 1
+  principal_procedure: MyString
+  cpt_code: MyString
+  origin_status: 1
+  hospital_admission_date: 2014-01-02 23:27:37
+  operation_date: 2014-01-02 23:27:37
+  anesthesia_technique: MyString
+  encounter_number: 1
