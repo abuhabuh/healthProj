@@ -3,7 +3,8 @@
   <div class='logo'> <%= link_to('Health DB Header', root_path) %> </div>
   <% if user_signed_in? %>
     <div class='login_link' style="float:right;">
-      <%= link_to 'my profile', current_user %> |
+      <%= link_to current_user.first_name + ' ' + current_user.last_name,
+                  current_user %> |
       <%= link_to 'Logout', destroy_user_session_path, :method => :delete %>
     </div>
   <% else %>

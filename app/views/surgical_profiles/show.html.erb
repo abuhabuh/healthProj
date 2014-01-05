@@ -1,13 +1,13 @@
 <p id="notice"><%= notice %></p>
 
 <p>
-  <strong>User id:</strong>
-  <%= @surgical_profile.user_id %>
+  <strong>Surgeon:</strong>
+  <%= @surgeon.first_name %> <%= @surgeon.last_name %>
 </p>
 
 <p>
-  <strong>Patient id:</strong>
-  <%= @surgical_profile.patient_id %>
+  <strong>Patient:</strong>
+  <%= @patient.first_name %> <%= @patient.last_name %>
 </p>
 
 <p>
@@ -55,5 +55,5 @@
   <%= @surgical_profile.encounter_number %>
 </p>
 
-<%= link_to 'Edit', edit_surgical_profile_path(@surgical_profile) %> |
-<%= link_to 'Back', surgical_profiles_path %>
+<%= link_to 'Edit', edit_patient_surgical_profile_path(@patient, @surgical_profile) %> |
+<%= link_to 'Back', patient_surgical_profiles_path(@patient) %>

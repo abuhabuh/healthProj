@@ -4,14 +4,14 @@ class DepartmentsController < ApplicationController
   #  TODO: call authenticate anyways?
   #  TODO: match these filters with cann'd rails filters
   #    - see surgical_profiles_controller.rb
-  before_filter :load_healthcare_provider
+  before_action :set_healthcare_provider
   respond_to :html, :xml, :json
 
   # GET /healthcare_providers/:id/departments/:id
   # GET /healthcare_providers/:id/departments/:id.json
   def index
     @departments = @healthcare_provider.departments.all
-    respond_with(@departments)
+    respond_with @departments
   end
 
   # GET /healthcare_providers/:id/departments/1
@@ -57,7 +57,7 @@ class DepartmentsController < ApplicationController
       params.require(:department).permit(:name, :healthcare_provider_id)
     end
 
-    def load_healthcare_provider
+    def set_healthcare_provider
       @healthcare_provider = HealthcareProvider.find(params[:healthcare_provider_id])
     end
 

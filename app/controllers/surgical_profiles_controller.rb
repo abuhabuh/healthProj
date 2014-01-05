@@ -1,35 +1,47 @@
 class SurgicalProfilesController < ApplicationController
-  before_action :set_surgical_profile, only: [:show, :edit, :update, :destroy]
+  before_action :set_patient, only: [:new, :index, :show, :edit, :update, :destroy]
+  before_action :set_surgical_profile, only: [:destroy, :update, :edit, :show]
+  respond_to :html, :xml, :json
 
-  # GET /surgical_profiles
-  # GET /surgical_profiles.json
+  # GET /patients/:id/surgical_profiles
+  # GET /patients/:id/surgical_profiles.json
   def index
-    @surgical_profiles = SurgicalProfile.all
+    @surgical_profiles = @patient.surgical_profiles.all
+    respond_with @surgical_profiles
   end
 
-  # GET /surgical_profiles/1
-  # GET /surgical_profiles/1.json
+  # GET /patients/:id/surgical_profiles/1
+  # GET /patients/:id/surgical_profiles/1.json
   def show
+    @surgeon = User.find(@surgical_profile.user_id)
   end
 
-  # GET /surgical_profiles/new
+  # GET /patients/:id/surgical_profiles/new
   def new
     @surgical_profile = SurgicalProfile.new
-    
+    # Create list of surgeons for selector on frontend
+    @surgeons_selector_arr = User.query_surgeons_selector_array()
   end
 
-  # GET /surgical_profiles/1/edit
+  # GET /patients/:id/surgical_profiles/1/edit
   def edit
+    @surgeon = User.find(@surgical_profile.user_id)
+    # Create list of surgeons for selector on frontend
+    @surgeons_selector_arr = User.query_surgeons_selector_array()
   end
 
-  # POST /surgical_profiles
-  # POST /surgical_profiles.json
+  # POST /patients/:id/surgical_profiles
+  # POST /patients/:id/surgical_profiles.json
   def create
     @surgical_profile = SurgicalProfile.new(surgical_profile_params)
 
+    # TODO: minimize into single query
+    @surgeon = User.find(@surgical_profile.user_id)
+    @patient = Patient.find(@surgical_profile.patient_id)
+
     respond_to do |format|
       if @surgical_profile.save
-        format.html { redirect_to @surgical_profile, notice: 'Surgical profile was successfully created.' }
+        format.html { redirect_to patient_surgical_profiles_path(@patient), notice: 'Surgical profile was successfully created.' }
         format.json { render action: 'show', status: :created, location: @surgical_profile }
       else
         format.html { render action: 'new' }
@@ -38,12 +50,13 @@ class SurgicalProfilesController < ApplicationController
     end
   end
 
-  # PATCH/PUT /surgical_profiles/1
-  # PATCH/PUT /surgical_profiles/1.json
+  # PATCH/PUT /patients/:id/surgical_profiles/1
+  # PATCH/PUT /patients/:id/surgical_profiles/1.json
   def update
     respond_to do |format|
       if @surgical_profile.update(surgical_profile_params)
-        format.html { redirect_to @surgical_profile, notice: 'Surgical profile was successfully updated.' }
+        format.html { redirect_to patient_surgical_profile_path(@patient, @surgical_profile),
+          notice: 'Surgical profile was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: 'edit' }
@@ -52,18 +65,22 @@ class SurgicalProfilesController < ApplicationController
     end
   end
 
-  # DELETE /surgical_profiles/1
-  # DELETE /surgical_profiles/1.json
+  # DELETE /patients/:id/surgical_profiles/1
+  # DELETE /patients/:id/surgical_profiles/1.json
   def destroy
     @surgical_profile.destroy
     respond_to do |format|
-      format.html { redirect_to surgical_profiles_url }
+      format.html { redirect_to patient_surgical_profiles_path(@patient) }
       format.json { head :no_content }
     end
   end
 
   private
     # Use callbacks to share common setup or constraints between actions.
+    def set_patient
+      @patient = Patient.find(params[:patient_id])
+    end
+
     def set_surgical_profile
       @surgical_profile = SurgicalProfile.find(params[:id])
     end

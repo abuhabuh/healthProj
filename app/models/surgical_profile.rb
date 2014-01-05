@@ -57,7 +57,7 @@ class SurgicalProfile < ActiveRecord::Base
 
   # return static constant nested arrays for selector that includes
   #   select option value and text
-  # - [[0, Inpatient], [1, Outpatient]] -> text is mapped to index
+  # - [[Inpatient ,0], [Outpatient, 1] -> text is mapped to index
   #   in the static constants array
   def self.get_patient_statuses_select
     return self.get_patient_statuses.map.with_index{|x,i| [x,i]}

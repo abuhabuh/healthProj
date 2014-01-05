@@ -1,17 +1,16 @@
 HealthProj::Application.routes.draw do
+  # TODO: Edit these routes and take out those taken over by backbone
+  # TODO: Clean up routes shared between devise and 'resources :users'
+
   # *note: always keep this on top
   root to: 'home#index'
 
-  resources :surgical_profiles
-
   get "registrations/update"
   get "users/show"
-  resources :user_surgeon_profiles
 
+  resources :user_surgeon_profiles
   resources :surgeon_specialties
 
-
-  # TODO: Edit these routes and take out those taken over by backbone
   resources :healthcare_providers do
     resources :departments
   end
@@ -19,10 +18,13 @@ HealthProj::Application.routes.draw do
   resources :ethnicities
   resources :countries
   resources :languages
-  resources :patients
   resources :departments
   devise_for :users, :controllers => { :registrations => "registrations" }
   resources :users
+
+  resources :patients do
+    resources :surgical_profiles
+  end
 
   # Standard page routes
   get '/admin', to: 'admin#index'
