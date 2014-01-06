@@ -10,6 +10,7 @@ div {
   max-width: inherit;
 }
 
+
 /* font weights and designs */
 .font-page-title {
   font-weight: bold;
@@ -18,6 +19,9 @@ div {
 .font-table-row-title {
   font-weight: bold;
 }
+  .font-table-section-header {
+    text-decoration: underline;
+  }
 
 /* common blocks */
 .page-title { /* remember to include .font-page-title also */
