@@ -20,6 +20,9 @@ module HealthProj
     # config.i18n.load_path += Dir[Rails.root.join('my', 'locales', '*.{rb,yml}').to_s]
     # config.i18n.default_locale = :de
     config.assets.precompile += [
+      'departments.css',
+      'healthcare_providers.css',
+      'patients.css',
       'scaffolds.css',
       'shared/*',
       'backbone/health_proj.js',
