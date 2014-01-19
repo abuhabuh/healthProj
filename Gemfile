@@ -8,13 +8,18 @@ gem 'rails', '4.0.1'
 ########### DATABASE #################
 gem 'mysql2'
 gem 'foreigner'
+gem 'attr_encryptor'
 
 ########### OTHER APP CORE #########
 gem 'devise'
 
 
 ########## FRONT END: js, css, etc ################
+# Front end js framework
 gem 'rails-backbone'
+# JSON serializer - big win is to pass non-encrypted attributes from
+#   attr_encryptor functions
+gem 'active_model_serializers'
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
 # Use Uglifier as compressor for JavaScript assets
@@ -25,6 +30,7 @@ gem 'jbuilder', '~> 1.2'
 gem 'sass-rails', '~> 4.0.0'
 # Use CoffeeScript for .js.coffee assets and views
 gem 'coffee-rails', '~> 4.0.0'
+
 
 ########## OTHER #####################
 # Turbolinks makes following links in your web application faster.

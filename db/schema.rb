@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140103072737) do
+ActiveRecord::Schema.define(version: 20140118172744) do
 
   create_table "countries", force: true do |t|
     t.string   "name"
@@ -33,12 +33,14 @@ ActiveRecord::Schema.define(version: 20140103072737) do
   add_index "departments", ["name", "healthcare_provider_id"], name: "index_departments_on_name_and_health_care_provider_id", unique: true, using: :btree
 
   create_table "ethnicities", force: true do |t|
-    t.string   "name"
+    t.string   "encrypted_name"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "encrypted_name_salt"
+    t.string   "encrypted_name_iv"
   end
 
-  add_index "ethnicities", ["name"], name: "index_ethnicities_on_name", unique: true, using: :btree
+  add_index "ethnicities", ["encrypted_name"], name: "index_ethnicities_on_encrypted_name", unique: true, using: :btree
 
   create_table "healthcare_providers", force: true do |t|
     t.string   "name"
@@ -48,48 +50,77 @@ ActiveRecord::Schema.define(version: 20140103072737) do
   end
 
   create_table "languages", force: true do |t|
-    t.string   "name"
+    t.string   "encrypted_name"
     t.integer  "country_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "encrypted_name_salt"
+    t.string   "encrypted_name_iv"
   end
 
   add_index "languages", ["country_id"], name: "languages_country_id_fk", using: :btree
-  add_index "languages", ["name"], name: "index_languages_on_name", unique: true, using: :btree
+  add_index "languages", ["encrypted_name"], name: "index_languages_on_encrypted_name", unique: true, using: :btree
 
   create_table "patients", force: true do |t|
-    t.integer  "medical_record_id"
-    t.string   "last_name"
-    t.string   "first_name"
-    t.string   "middle_initial"
-    t.string   "address1"
-    t.string   "address2"
-    t.string   "city"
-    t.string   "state"
-    t.string   "home_phone"
-    t.string   "work_phone"
-    t.string   "cell_phone"
-    t.date     "date_of_birth"
-    t.string   "gender"
+    t.string   "encrypted_last_name"
+    t.string   "encrypted_first_name"
+    t.string   "encrypted_middle_initial"
+    t.string   "encrypted_address1"
+    t.string   "encrypted_address2"
+    t.string   "encrypted_city"
+    t.string   "encrypted_state"
+    t.string   "encrypted_home_phone"
+    t.string   "encrypted_work_phone"
+    t.string   "encrypted_cell_phone"
+    t.string   "encrypted_gender"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "race_id"
     t.integer  "ethnicity_id"
     t.integer  "language_id"
+    t.string   "encrypted_medical_record_id"
+    t.string   "encrypted_date_of_birth"
+    t.string   "encrypted_medical_record_id_salt"
+    t.string   "encrypted_medical_record_id_iv"
+    t.string   "encrypted_date_of_birth_salt"
+    t.string   "encrypted_date_of_birth_iv"
+    t.string   "encrypted_last_name_salt"
+    t.string   "encrypted_last_name_iv"
+    t.string   "encrypted_first_name_salt"
+    t.string   "encrypted_first_name_iv"
+    t.string   "encrypted_middle_initial_salt"
+    t.string   "encrypted_middle_initial_iv"
+    t.string   "encrypted_address1_salt"
+    t.string   "encrypted_address1_iv"
+    t.string   "encrypted_address2_salt"
+    t.string   "encrypted_address2_iv"
+    t.string   "encrypted_city_salt"
+    t.string   "encrypted_city_iv"
+    t.string   "encrypted_state_salt"
+    t.string   "encrypted_state_iv"
+    t.string   "encrypted_home_phone_salt"
+    t.string   "encrypted_home_phone_iv"
+    t.string   "encrypted_work_phone_salt"
+    t.string   "encrypted_work_phone_iv"
+    t.string   "encrypted_cell_phone_salt"
+    t.string   "encrypted_cell_phone_iv"
+    t.string   "encrypted_gender_salt"
+    t.string   "encrypted_gender_iv"
   end
 
   add_index "patients", ["ethnicity_id"], name: "patients_ethnicity_id_fk", using: :btree
   add_index "patients", ["language_id"], name: "patients_language_id_fk", using: :btree
-  add_index "patients", ["medical_record_id"], name: "index_patients_on_medical_record_id", unique: true, using: :btree
   add_index "patients", ["race_id"], name: "patients_race_id_fk", using: :btree
 
   create_table "races", force: true do |t|
-    t.string   "name"
+    t.string   "encrypted_name"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "encrypted_name_salt"
+    t.string   "encrypted_name_iv"
   end
 
-  add_index "races", ["name"], name: "index_races_on_name", unique: true, using: :btree
+  add_index "races", ["encrypted_name"], name: "index_races_on_encrypted_name", unique: true, using: :btree
 
   create_table "surgeon_specialties", force: true do |t|
     t.string   "name"

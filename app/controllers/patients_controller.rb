@@ -9,8 +9,7 @@ class PatientsController < ApplicationController
   # GET /patients.json
   def index
     @patients = Patient.all
-
-    respond_with(@patients)
+    respond_with @patients
   end
 
   # GET /patients/1
@@ -34,10 +33,9 @@ class PatientsController < ApplicationController
 
     respond_to do |format|
       if @patient.save
-        format.html { redirect_to @patient, 
+        format.html { redirect_to @patient,
           notice: 'Patient was successfully created.' }
-        format.json { render action: 'show', 
-          status: :created, location: @patient }
+        format.json { render json: @patient, status: :created }
       else
         format.html { render action: 'new' }
         format.json { render json: @patient.errors,
@@ -52,7 +50,7 @@ class PatientsController < ApplicationController
     respond_to do |format|
       if @patient.update(patient_params)
         format.html { redirect_to @patient, notice: 'Patient was successfully updated.' }
-        format.json { head :no_content }
+        format.json { render json: @patient, status: :no_content }
       else
         format.html { render action: 'edit' }
         format.json { render json: @patient.errors, status: :unprocessable_entity }
@@ -76,8 +74,14 @@ class PatientsController < ApplicationController
       @patient = Patient.find(params[:id])
     end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
+    # Never trust parameters from the scary internet, only allow the white 
+    #   list through.
     def patient_params
-      params.require(:patient).permit(:medical_record_id, :last_name, :first_name, :middle_initial, :address1, :address2, :city, :state, :phone_home, :phone, :work_phone, :cell_phone, :date_of_birth, :time, :gender, :race, :ethnicity, :preferred_language)
+      params.require(:patient).permit(
+        :medical_record_id, :last_name, :first_name, :middle_initial,
+        :address1, :address2, :city, :state, :phone_home, :phone,
+        :work_phone, :cell_phone, :date_of_birth, :time, :gender,
+        :race, :ethnicity, :language
+      )
     end
 end

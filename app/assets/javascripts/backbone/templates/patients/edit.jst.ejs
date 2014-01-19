@@ -1,25 +1,68 @@
-<h1>Edit patient</h1>
+<h1>Edit patient: <%= first_name %> <%= last_name %> </h1>
 
-<form id="edit-patient" name="patient">
+<div style="clear: both">
+  <form id="edit-patient" name="patient">
 
-  <div class="field">
-    <label for="first_name"> First Name: </label>
-    <input type="text" name="first_name" id="first_name" >
-  </div>
-  <div class="field">
-    <label for="last_name"> Last Name: </label>
-    <input type="text" name="last_name" id="last_name" >
-  </div>
-  <div class="field">
-    <label for="gender"> Gender: </label>
-    <input type="text" name="gender" id="gender" >
-  </div>
+    <div class="field" style="clear: both">
+      <label for="first_name"> First Name: </label>
+      <input type="text" name="first_name" id="first_name" value="<%= first_name %>">
+    </div>
+    <div class="field" style="clear: both">
+      <label for="last_name"> Last Name: </label>
+      <input type="text" name="last_name" id="last_name" value="<%= last_name %>">
+    </div>
+    <div class="field" style="clear: both">
+      <label for="middle_initial"> Middle Initial: </label>
+      <input type="text" name="middle_initial" id="middle_initial" value="<%= middle_initial %>">
+    </div>
+    <div class="field" style="clear: both">
+      <label for="gender"> Gender: </label>
+      <input type="text" name="gender" id="gender" value="<%= gender %>">
+    </div>
+    <div class="field" style="clear: both">
+      <label for="medical_record_id"> Medical Record id: </label>
+      <input type="text" name="medical_record_id" id="medical_record_id" value="<%= medical_record_id %>">
+    </div>
+    <div class="field" style="clear: both">
+      <label for="date_of_birth"> Date of Birth: </label>
+      <input type="text" name="date_of_birth" id="date_of_birth" value="<%= date_of_birth %>">
+    </div>
+    <div class="field" style="clear: both">
+      <label for="address1"> Address 1: </label>
+      <input type="text" name="address1" id="address1" value="<%= address1 %>">
+    </div>
+    <div class="field" style="clear: both">
+      <label for="address2"> Address 2: </label>
+      <input type="text" name="address2" id="address2" value="<%= address2 %>">
+    </div>
+    <div class="field" style="clear: both">
+      <label for="city"> City: </label>
+      <input type="text" name="city" id="city" value="<%= city %>">
+    </div>
+    <div class="field" style="clear: both">
+      <label for="state"> State: </label>
+      <input type="text" name="state" id="state" value="<%= state %>">
+    </div>
+    <div class="field" style="clear: both">
+      <label for="home_phone"> Home Phone: </label>
+      <input type="text" name="home_phone" id="home_phone" value="<%= home_phone %>">
+    </div>
+    <div class="field" style="clear: both">
+      <label for="work_phone"> Work Phone: </label>
+      <input type="text" name="work_phone" id="work_phone" value="<%= work_phone %>">
+    </div>
+    <div class="field" style="clear: both">
+      <label for="cell_phone"> Cell Phone: </label>
+      <input type="text" name="cell_phone" id="cell_phone" value="<%= cell_phone %>">
+    </div>
 
+    <div class="actions" style="clear: both">
+      <input type="submit" value="Update Patient" />
+    </div>
 
-  <div class="actions">
-    <input type="submit" value="Update Patient" />
-  </div>
+  </form>
+</div>
 
-</form>
-
-<a href="#/index">Back</a>
+<div style="clear: both">
+  <a href="#/index">Back</a>
+</div>

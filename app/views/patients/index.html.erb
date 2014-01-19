@@ -11,8 +11,10 @@
 
 <script type='text/javascript'>
   $(function(){
+    <!-- TODO: understand ActiveModel::ArraySerializer call -->
     window.router = new HealthProj.Routers.PatientsRouter(
-      {patients: <%= @patients.to_json.html_safe -%>});
+      {patients: <%= ActiveModel::ArraySerializer.new(
+        @patients, each_serializer: PatientSerializer).to_json.html_safe -%>});
     Backbone.history.start();
   });
 </script>

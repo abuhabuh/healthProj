@@ -1,3 +1,7 @@
 class Race < ActiveRecord::Base
-  validates_uniqueness_of :name
+  has_many :patients
+
+  # Encryption
+  attr_encrypted :name, :key => 'blah_key'
+
 end

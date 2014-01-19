@@ -41,7 +41,7 @@ class HealthProj.Views.HealthcareProviders.ShowView extends Backbone.View
 
     @model.departments.create(department.toJSON(),
       error: (department, response, options) =>
-        debugger
+        # TODO: implement or delete this, used to have debug statement here
       wait: true
     )
 
@@ -62,4 +62,4 @@ class HealthProj.Views.HealthcareProviders.ShowView extends Backbone.View
     @$(".departments-list-container").append(departmentView.render().el)
 
   _setDeptValidationError: (model, error) ->
-    debugger
+    # TODO: implement or delete this: used to have debug statement here

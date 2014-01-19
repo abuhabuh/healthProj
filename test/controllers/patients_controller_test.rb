@@ -18,7 +18,7 @@ class PatientsControllerTest < ActionController::TestCase
 
   test "should create patient" do
     assert_difference('Patient.count') do
-      post :create, patient: { address1: @patient.address1, address2: @patient.address2, cell_phone: @patient.cell_phone, city: @patient.city, date_of_birth: @patient.date_of_birth, ethnicity: @patient.ethnicity, first_name: @patient.first_name, gender: @patient.gender, last_name: @patient.last_name, medical_record_id: @patient.medical_record_id, middle_initial: @patient.middle_initial, phone: @patient.phone, phone_home: @patient.phone_home, preferred_language: @patient.preferred_language, race: @patient.race, state: @patient.state, time: @patient.time, work_phone: @patient.work_phone }
+      post :create, patient: { address1: @patient.address1, address2: @patient.address2, cell_phone: @patient.cell_phone, city: @patient.city, date_of_birth: @patient.date_of_birth, ethnicity: @patient.ethnicity, first_name: @patient.first_name, gender: @patient.gender, last_name: @patient.last_name, medical_record_id: @patient.medical_record_id, middle_initial: @patient.middle_initial, phone: @patient.phone, phone_home: @patient.phone_home, language: @patient.language, race: @patient.race, state: @patient.state, time: @patient.time, work_phone: @patient.work_phone }
     end
 
     assert_redirected_to patient_path(assigns(:patient))
@@ -35,7 +35,7 @@ class PatientsControllerTest < ActionController::TestCase
   end
 
   test "should update patient" do
-    patch :update, id: @patient, patient: { address1: @patient.address1, address2: @patient.address2, cell_phone: @patient.cell_phone, city: @patient.city, date_of_birth: @patient.date_of_birth, ethnicity: @patient.ethnicity, first_name: @patient.first_name, gender: @patient.gender, last_name: @patient.last_name, medical_record_id: @patient.medical_record_id, middle_initial: @patient.middle_initial, phone: @patient.phone, phone_home: @patient.phone_home, preferred_language: @patient.preferred_language, race: @patient.race, state: @patient.state, time: @patient.time, work_phone: @patient.work_phone }
+    patch :update, id: @patient, patient: { address1: @patient.address1, address2: @patient.address2, cell_phone: @patient.cell_phone, city: @patient.city, date_of_birth: @patient.date_of_birth, ethnicity: @patient.ethnicity, first_name: @patient.first_name, gender: @patient.gender, last_name: @patient.last_name, medical_record_id: @patient.medical_record_id, middle_initial: @patient.middle_initial, phone: @patient.phone, phone_home: @patient.phone_home, language: @patient.language, race: @patient.race, state: @patient.state, time: @patient.time, work_phone: @patient.work_phone }
     assert_redirected_to patient_path(assigns(:patient))
   end
 

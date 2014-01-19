@@ -18,7 +18,7 @@ one:
   gender: MyString
   race: MyString
   ethnicity: MyString
-  preferred_language: MyString
+  language: MyString
 
 two:
   medical_record_id: 1
@@ -38,4 +38,4 @@ two:
   gender: MyString
   race: MyString
   ethnicity: MyString
-  preferred_language: MyString
+  language: MyString

@@ -1,3 +1,7 @@
 class Ethnicity < ActiveRecord::Base
-  validates_uniqueness_of :name
+
+  # Encryption
+  attr_encrypted :name, :key => 'blah_key'
+
+
 end
