@@ -21,6 +21,9 @@
 ###
 
 class Patient < ActiveRecord::Base
+
+  include EncryptionKey
+
   has_many :surgical_profiles, dependent: :destroy
   belongs_to :race
   belongs_to :ethnicity
@@ -30,19 +33,19 @@ class Patient < ActiveRecord::Base
   @@ENUM_SEX = %w(male female)
 
   # Encryption
-  attr_encrypted :medical_record_id, :key => 'blah_key'
-  attr_encrypted :date_of_birth, :key => 'blah_key'
-  attr_encrypted :last_name, :key => 'blah_key'
-  attr_encrypted :first_name, :key => 'blah_key'
-  attr_encrypted :middle_initial, :key => 'blah_key'
-  attr_encrypted :address1, :key => 'blah_key'
-  attr_encrypted :address2, :key => 'blah_key'
-  attr_encrypted :city, :key => 'blah_key'
-  attr_encrypted :state, :key => 'blah_key'
-  attr_encrypted :home_phone, :key => 'blah_key'
-  attr_encrypted :work_phone, :key => 'blah_key'
-  attr_encrypted :cell_phone, :key => 'blah_key'
-  attr_encrypted :gender, :key => 'blah_key'
+  attr_encrypted :medical_record_id, :key => :encryption_key
+  attr_encrypted :date_of_birth, :key => :encryption_key
+  attr_encrypted :last_name, :key => :encryption_key
+  attr_encrypted :first_name, :key => :encryption_key
+  attr_encrypted :middle_initial, :key => :encryption_key
+  attr_encrypted :address1, :key => :encryption_key
+  attr_encrypted :address2, :key => :encryption_key
+  attr_encrypted :city, :key => :encryption_key
+  attr_encrypted :state, :key => :encryption_key
+  attr_encrypted :home_phone, :key => :encryption_key
+  attr_encrypted :work_phone, :key => :encryption_key
+  attr_encrypted :cell_phone, :key => :encryption_key
+  attr_encrypted :gender, :key => :encryption_key
 
   # Validation
   validates_inclusion_of :gender, :in => @@ENUM_SEX

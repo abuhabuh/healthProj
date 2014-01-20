@@ -1,6 +1,8 @@
 class Language < ActiveRecord::Base
-  # Encryption
-  attr_encrypted :name, :key => 'blah_key'
 
+  include EncryptionKey
+
+  # Encryption
+  attr_encrypted :name, :key => :encryption_key
 
 end
