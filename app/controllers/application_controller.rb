@@ -7,6 +7,11 @@ class ApplicationController < ActionController::Base
   #   https://github.com/plataformatec/devise/wiki/How-To%3a-Allow-users-to-edit-their-account-without-providing-a-password
   before_filter :configure_devise_params, if: :devise_controller?
 
+  # Handle Cancan exception and redirect to homepage
+  rescue_from CanCan::AccessDenied do |exception|
+    redirect_to root_url, :alert => exception.message
+  end
+
   protected
     # Allows custom parameters for Devise controller
     def configure_devise_params

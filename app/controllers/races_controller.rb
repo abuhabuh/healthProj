@@ -1,6 +1,7 @@
 class RacesController < ApplicationController
   before_filter :authenticate_user!
   before_action :set_race, only: [:show, :edit, :update, :destroy]
+  authorize_resource
 
   # GET /races
   # GET /races.json

@@ -4,11 +4,12 @@ class PatientsController < ApplicationController
   #  http://guides.rubyonrails.org/action_controller_overview.html
   before_action :set_patient, only: [:show, :edit, :update, :destroy]
   respond_to :html, :xml, :json
+  authorize_resource
 
   # GET /patients - returns html page to render patients view
   # GET /patients.json
   def index
-    @patients = Patient.all
+    @patients = Patient.query_all_patients(current_user)
     respond_with @patients
   end
 
@@ -71,10 +72,10 @@ class PatientsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_patient
-      @patient = Patient.find(params[:id])
+      @patient = Patient.query_patient_by_id(current_user, params[:id])
     end
 
-    # Never trust parameters from the scary internet, only allow the white 
+    # Never trust parameters from the scary internet, only allow the white
     #   list through.
     def patient_params
       params.require(:patient).permit(

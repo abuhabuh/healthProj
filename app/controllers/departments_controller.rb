@@ -6,6 +6,7 @@ class DepartmentsController < ApplicationController
   #    - see surgical_profiles_controller.rb
   before_action :set_healthcare_provider
   respond_to :html, :xml, :json
+  authorize_resource
 
   # GET /healthcare_providers/:id/departments/:id
   # GET /healthcare_providers/:id/departments/:id.json

@@ -1,5 +1,6 @@
 class HealthcareProvidersController < ApplicationController
   before_action :set_healthcare_provider, only: [:show, :edit, :update, :destroy]
+  authorize_resource
 
   # GET /healthcare_providers
   # GET /healthcare_providers.json

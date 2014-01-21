@@ -1,5 +1,6 @@
 class SurgeonSpecialtiesController < ApplicationController
   before_action :set_surgeon_specialty, only: [:show, :edit, :update, :destroy]
+  authorize_resource
 
   # GET /surgeon_specialties
   # GET /surgeon_specialties.json

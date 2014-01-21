@@ -1,5 +1,6 @@
 class UserSurgeonProfilesController < ApplicationController
   before_action :set_user_surgeon_profile, only: [:show, :edit, :update, :destroy]
+  authorize_resource
 
   # GET /user_surgeon_profiles
   # GET /user_surgeon_profiles.json

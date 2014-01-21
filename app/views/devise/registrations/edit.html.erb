@@ -16,11 +16,6 @@
     </div>
 
     <div style='clear: both'>
-      <%= f.select :role, User.get_available_roles() %>
-      <%= f.label :role %>
-    </div>
-
-    <div style='clear: both'>
       <%= f.email_field :email, :autofocus => true %>
       <%= f.label :email %>
     </div>

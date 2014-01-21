@@ -3,5 +3,7 @@ class AdminController < ApplicationController
   # TODO: check authorization
 
   def index
+  
   end
+
 end

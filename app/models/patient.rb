@@ -49,4 +49,55 @@ class Patient < ActiveRecord::Base
 
   # Validation
   validates_inclusion_of :gender, :in => @@ENUM_SEX
+
+  ###
+  # Static methods
+  ###
+
+  # Returns patients viewable by current signed in user
+  # TEST - http://localhost:3000/patients
+  def self.query_all_patients(current_user)
+    if current_user.is_admin()
+      return Patient.all
+    else
+      return Patient.joins(:surgical_profiles)
+                    .where(surgical_profiles: {user_id: current_user.id})
+    end
+  end
+
+  # Returns patient if it's viewable by current signed in user
+  # Exception is raised if not viewable
+  def self.query_patient_by_id(current_user, patient_id)
+    if current_user.is_admin()
+      return Patient.find(patient_id)
+    else
+      patient = Patient.joins(:surgical_profiles)
+                       .where(patients: {id: patient_id})
+                       .where(surgical_profiles: {user_id: current_user.id})
+                       .first
+      if patient.nil?
+        raise CanCan::AccessDenied.new(
+          "Not authorized to view this patient's data!", :read, Patient
+          )
+      end
+      return patient
+    end
+  end
+
+
+  ###
+  # Instance methods
+  ###
+
+  # Returns surgical profiles viewable by current signed in user
+  # TEST - http://localhost:3000/patients/17/surgical_profiles
+  def query_surgical_profiles(current_user)
+    if current_user.is_admin()
+      return self.surgical_profiles
+    else
+      return self.surgical_profiles
+                 .where(surgical_profiles: {user_id: current_user.id})
+    end
+  end
+
 end

@@ -54,3 +54,8 @@ SurgeonSpecialty.create!(:name=> 'Otalarynology')
 SurgeonSpecialty.create!(:name=> 'Plastics')
 SurgeonSpecialty.create!(:name=> 'Gynecology')
 SurgeonSpecialty.create!(:name=> 'Interventional Radiology')
+
+# Add Roles
+Role.delete_all
+Role.create!(:name=> 'Administrator')
+Role.create!(:name=> 'Surgeon')

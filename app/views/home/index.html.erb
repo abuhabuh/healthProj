@@ -1,4 +1,9 @@
 <div style="clear:left;">
+
+  <% flash.each do |key, value| %>
+    <%= content_tag(:div, value, :class => "flash #{key}") %>
+  <% end %>
+
   <p>
     hello
   </p>
@@ -7,6 +12,6 @@
     <%= link_to 'View Patients', patients_path %>
   </p>
   <p>
-    <%= link_to 'View Surgical Profiles - BROKEN', '#' %>
+    <%= link_to 'View Surgical Profiles', surgical_profiles_path %>
   </p>
 </div>

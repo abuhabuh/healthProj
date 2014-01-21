@@ -1,17 +1,38 @@
+###
+# Description
+#
+# Index handler
+# - Can show profiles for a specific patient
+# - Can show profiles for a specific surgeon
+###
+
 class SurgicalProfilesController < ApplicationController
-  before_action :set_patient, only: [:new, :index, :show, :edit, :update, :destroy]
-  before_action :set_surgical_profile, only: [:destroy, :update, :edit, :show]
+  before_action :set_patient_and_profile,
+    only: [:show, :edit, :update, :destroy, :new, :index]
   respond_to :html, :xml, :json
+  authorize_resource
 
   # GET /patients/:id/surgical_profiles
   # GET /patients/:id/surgical_profiles.json
+  # GET /surgical_profiles
   def index
-    @surgical_profiles = @patient.surgical_profiles.all
+    # Template has to handel:
+    # - Display profiles for a patient
+    # - Display profiles for a surgeon
+    @surgical_profiles = nil
+    if @came_from_patient_page
+      @surgical_profiles =
+        @patient.query_surgical_profiles(current_user)
+    else
+      @surgical_profiles =
+        SurgicalProfile.query_surgical_profiles_by_surgeon(current_user)
+    end
     respond_with @surgical_profiles
   end
 
   # GET /patients/:id/surgical_profiles/1
   # GET /patients/:id/surgical_profiles/1.json
+  # GET /surgical_profiles/1
   def show
     @surgeon = User.find(@surgical_profile.user_id)
   end
@@ -36,8 +57,10 @@ class SurgicalProfilesController < ApplicationController
     @surgical_profile = SurgicalProfile.new(surgical_profile_params)
 
     # TODO: minimize into single query
+    @patient = Patient.query_patient_by_id(
+      current_user, @surgical_profile.patient_id
+      )
     @surgeon = User.find(@surgical_profile.user_id)
-    @patient = Patient.find(@surgical_profile.patient_id)
 
     respond_to do |format|
       if @surgical_profile.save
@@ -77,12 +100,29 @@ class SurgicalProfilesController < ApplicationController
 
   private
     # Use callbacks to share common setup or constraints between actions.
-    def set_patient
-      @patient = Patient.find(params[:patient_id])
-    end
+    def set_patient_and_profile
+      @came_from_patient_page = params.has_key?(:patient_id)
 
-    def set_surgical_profile
-      @surgical_profile = SurgicalProfile.find(params[:id])
+      # Set surgical profile
+      @surgical_profile = nil
+      if params.has_key?(:id)
+        @surgical_profile =
+          SurgicalProfile.query_surgical_profile_by_id(
+            current_user, params[:id]
+            )
+      end
+
+      # Set patient
+      # - from url if navigating from patient page
+      # - from surgical_profile if not (and surgical profile exists)
+      @patient = nil
+      if @came_from_patient_page
+        @patient = Patient.query_patient_by_id(current_user, params[:patient_id])
+      else
+        if @surgical_profile
+          @patient = Patient.query_patient_by_id(current_user, @surgical_profile.patient_id)
+        end
+      end
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

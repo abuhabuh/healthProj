@@ -12,7 +12,7 @@ gem 'attr_encryptor'
 
 ########### OTHER APP CORE #########
 gem 'devise'
-
+gem 'cancan'
 
 ########## FRONT END: js, css, etc ################
 # Front end js framework

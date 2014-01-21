@@ -1,5 +1,9 @@
 <h1>
-  Surgical Profiles for <%= @patient.first_name %> <%= @patient.last_name %>
+  <% if @came_from_patient_page %>
+    Surgical Profiles for <%= @patient.first_name %> <%= @patient.last_name %>
+  <% else %>
+    Surgical Profiles belonging to <%= current_user.first_name %> <%= current_user.last_name %>
+  <% end %>
 </h1>
 
 <table>
@@ -32,14 +36,24 @@
         <td><%= surgical_profile.operation_date %></td>
         <td><%= surgical_profile.anesthesia_technique %></td>
         <td><%= surgical_profile.encounter_number %></td>
-        <td><%= link_to 'Show', patient_surgical_profile_path(@patient, surgical_profile) %></td>
-        <td><%= link_to 'Edit', edit_patient_surgical_profile_path(@patient, surgical_profile) %></td>
-        <td><%= link_to 'Destroy', patient_surgical_profile_path(@patient, surgical_profile), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <% if @came_from_patient_page %>
+          <td><%= link_to 'Show', patient_surgical_profile_path(@patient, surgical_profile) %></td>
+          <td><%= link_to 'Edit', edit_patient_surgical_profile_path(@patient, surgical_profile) %></td>
+          <td><%= link_to 'Destroy', patient_surgical_profile_path(@patient, surgical_profile), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <% else %>
+          <td><%= link_to 'Show', surgical_profile_path(surgical_profile) %></td>
+          <td><%= link_to 'Edit', edit_surgical_profile_path(surgical_profile) %></td>
+          <td><%= link_to 'Destroy', surgical_profile_path(surgical_profile), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <% end %>
       </tr>
     <% end %>
   </tbody>
 </table>
 
 <p>
-  <%= link_to 'New Surgical Profile', new_patient_surgical_profile_path(@patient.id) %>
+  <% if @came_from_patient_page %>
+    <%= link_to 'New Surgical Profile', new_patient_surgical_profile_path(@patient.id) %>
+  <% else %>
+    <%= link_to 'New Surgical Profile', new_surgical_profile_path %>
+  <% end %>
 </p>
