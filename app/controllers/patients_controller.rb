@@ -33,7 +33,7 @@ class PatientsController < ApplicationController
     @patient = Patient.new(patient_params)
 
     respond_to do |format|
-      if @patient.save
+      if @patient.preprocess_and_save
         format.html { redirect_to @patient,
           notice: 'Patient was successfully created.' }
         format.json { render json: @patient, status: :created }
@@ -49,7 +49,7 @@ class PatientsController < ApplicationController
   # PATCH/PUT /patients/1.json
   def update
     respond_to do |format|
-      if @patient.update(patient_params)
+      if @patient.preprocess_and_update(patient_params)
         format.html { redirect_to @patient, notice: 'Patient was successfully updated.' }
         format.json { render json: @patient, status: :no_content }
       else

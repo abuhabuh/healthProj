@@ -18,7 +18,15 @@
 #   - encrypted_gender
 # - Foreign key references to :race_id, :ethnicity_id,
 #   :language_id not encrypted, but referenced tables are
+#
+# Special Notes
+# - Date of birth stored as encrypted string in DB; model handles
+#   transformation from string to date object and vice versa
+#   - Wrappers used for save and update functions to handle
+#     transformation
 ###
+
+include ApplicationHelper
 
 class Patient < ActiveRecord::Base
 
@@ -58,18 +66,21 @@ class Patient < ActiveRecord::Base
   # TEST - http://localhost:3000/patients
   def self.query_all_patients(current_user)
     if current_user.is_admin()
-      return Patient.all
+      patients = Patient.all
     else
-      return Patient.joins(:surgical_profiles)
-                    .where(surgical_profiles: {user_id: current_user.id})
+      patients = Patient.joins(:surgical_profiles)
+                        .where(surgical_profiles: {user_id: current_user.id})
     end
+
+    self.process_attrs_after_read_batch(patients)
+    return patients
   end
 
   # Returns patient if it's viewable by current signed in user
   # Exception is raised if not viewable
   def self.query_patient_by_id(current_user, patient_id)
     if current_user.is_admin()
-      return Patient.find(patient_id)
+      patient = Patient.find(patient_id)
     else
       patient = Patient.joins(:surgical_profiles)
                        .where(patients: {id: patient_id})
@@ -80,8 +91,10 @@ class Patient < ActiveRecord::Base
           "Not authorized to view this patient's data!", :read, Patient
           )
       end
-      return patient
     end
+
+    self.process_attrs_after_read_single(patient)
+    return patient
   end
 
 
@@ -92,12 +105,61 @@ class Patient < ActiveRecord::Base
   # Returns surgical profiles viewable by current signed in user
   # TEST - http://localhost:3000/patients/17/surgical_profiles
   def query_surgical_profiles(current_user)
-    if current_user.is_admin()
-      return self.surgical_profiles
-    else
-      return self.surgical_profiles
-                 .where(surgical_profiles: {user_id: current_user.id})
-    end
+    return SurgicalProfile.query_surgical_profiles_by_patient(
+      current_user, self.id
+      )
   end
+
+  # Wrapper for save function that transforms date attribute to
+  #   string for encryption
+  def preprocess_and_save
+    process_attrs_before_write(self)
+    return self.save()
+  end
+
+  # Wrapper for update function that transforms date attribute to
+  #   string for encryption
+  def preprocess_and_update(patient_params)
+    process_attrs_before_write_params(patient_params)
+    return self.update(patient_params)
+  end
+
+
+  private
+    ###
+    # Static methods
+    ###
+
+    # Convert certain attrs after read from DB (due to encryption needs)
+    def self.process_attrs_after_read_single(patient)
+      if patient.date_of_birth
+        patient.date_of_birth = Date.parse(patient.date_of_birth)
+      end
+    end
+
+    # Convert certain attrs after read from DB (due to encryption needs)
+    def self.process_attrs_after_read_batch(patients)
+      patients.each do |patient|
+        self.process_attrs_after_read_single(patient)
+      end
+    end
+
+    ###
+    # Instance methods
+    ###
+
+    # Convert certain attrs for write to DB (due to encryption needs)
+    def process_attrs_before_write(patient)
+      if patient.date_of_birth
+        patient.date_of_birth = patient.date_of_birth.to_s
+      end
+    end
+
+    # Convert certain attrs for write to DB (due to encryption needs)
+    def process_attrs_before_write_params(patient_params)
+      if patient_params[:date_of_birth].present?
+        patient_params[:date_of_birth] = patient_params[:date_of_birth].to_s
+      end
+    end
 
 end

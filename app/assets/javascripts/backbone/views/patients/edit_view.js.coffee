@@ -7,6 +7,8 @@ class HealthProj.Views.Patients.EditView extends Backbone.View
     "submit #edit-patient" : "update"
 
   update : (e) ->
+    # DOB is saved in DB as string; backend model handles transform
+    #   between string and date object
     e.preventDefault()
     e.stopPropagation()
 

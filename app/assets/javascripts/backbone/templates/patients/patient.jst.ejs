@@ -1,5 +1,5 @@
 <div class='patient-main-hor' style='clear:both'>
-  <div class='row-name'>
+  <div class='col-name'>
     <% if (last_name && last_name.trim != '') { %>
       <%= last_name %>,
     <% } %>
@@ -8,16 +8,16 @@
       <%= middle_initial %>.
     <% } %>
   </div>
-  <div class='row-mrn'>
+  <div class='col-mrn'>
     MRN: <%= medical_record_id %>
   </div>
-  <div class='row-dob'>
+  <div class='col-dob'>
     DOB: <%= date_of_birth %>
   </div>
-  <div class='row-age'>
+  <div class='col-age'>
     Age: <%= calculateAge(date_of_birth) %>
   </div>
-  <div class='row-sex'>
+  <div class='col-sex'>
     <%= gender %>
   </div>
 </div>

@@ -1,59 +1,87 @@
-<h1>
-  <% if @came_from_patient_page %>
-    Surgical Profiles for <%= @patient.first_name %> <%= @patient.last_name %>
-  <% else %>
-    Surgical Profiles belonging to <%= current_user.first_name %> <%= current_user.last_name %>
-  <% end %>
-</h1>
+<% content_for :css do %>
+  <%= stylesheet_link_tag "surgical_profiles", media: "all" %>
+<% end %>
 
-<table>
-  <thead>
-    <tr>
-      <th>Patient status</th>
-      <th>Elective surgery</th>
-      <th>Principal procedure</th>
-      <th>Cpt code</th>
-      <th>Origin status</th>
-      <th>Hospital admission date</th>
-      <th>Operation date</th>
-      <th>Anesthesia technique</th>
-      <th>Encounter number</th>
-      <th></th>
-      <th></th>
-      <th></th>
-    </tr>
-  </thead>
 
-  <tbody>
-    <% @surgical_profiles.each do |surgical_profile| %>
-      <tr>
-        <td><%= surgical_profile.patient_status %></td>
-        <td><%= surgical_profile.elective_surgery %></td>
-        <td><%= surgical_profile.principal_procedure %></td>
-        <td><%= surgical_profile.cpt_code %></td>
-        <td><%= surgical_profile.origin_status %></td>
-        <td><%= surgical_profile.hospital_admission_date %></td>
-        <td><%= surgical_profile.operation_date %></td>
-        <td><%= surgical_profile.anesthesia_technique %></td>
-        <td><%= surgical_profile.encounter_number %></td>
-        <% if @came_from_patient_page %>
-          <td><%= link_to 'Show', patient_surgical_profile_path(@patient, surgical_profile) %></td>
-          <td><%= link_to 'Edit', edit_patient_surgical_profile_path(@patient, surgical_profile) %></td>
-          <td><%= link_to 'Destroy', patient_surgical_profile_path(@patient, surgical_profile), method: :delete, data: { confirm: 'Are you sure?' } %></td>
-        <% else %>
-          <td><%= link_to 'Show', surgical_profile_path(surgical_profile) %></td>
-          <td><%= link_to 'Edit', edit_surgical_profile_path(surgical_profile) %></td>
-          <td><%= link_to 'Destroy', surgical_profile_path(surgical_profile), method: :delete, data: { confirm: 'Are you sure?' } %></td>
-        <% end %>
-      </tr>
+<div class='surgical-profiles-list-container-hor clear-both'>
+  <div class='font-page-title clear-both'>
+    <% if @came_from_patient_page %>
+      Surgical Profiles for Patient: <%= @patient.first_name %> <%= @patient.last_name %>
+    <% else %>
+      Surgical Profiles belonging to Surgeon: <%= current_user.first_name %> <%= current_user.last_name %>
     <% end %>
-  </tbody>
-</table>
+  </div>
 
-<p>
-  <% if @came_from_patient_page %>
-    <%= link_to 'New Surgical Profile', new_patient_surgical_profile_path(@patient.id) %>
-  <% else %>
-    <%= link_to 'New Surgical Profile', new_surgical_profile_path %>
+  <% @surgical_profiles.each do |surgical_profile| %>
+
+    <div class='surgical-profile-container-hor clear-both'>
+
+      <div class='surgical-profile-main-hor clear-both'>
+        <div class='col-cpt-code'>
+          Profile CPT Code: <%= surgical_profile.cpt_code %>
+          <div class='control-links'>
+            <% if @came_from_patient_page %>
+              <%= link_to 'Show', patient_surgical_profile_path(@patient, surgical_profile) %>
+              <%= link_to 'Edit', edit_patient_surgical_profile_path(@patient, surgical_profile) %>
+              <%= link_to 'Destroy', patient_surgical_profile_path(@patient, surgical_profile), method: :delete, data: { confirm: 'Are you sure?' } %>
+            <% else %>
+              <%= link_to 'Show', surgical_profile_path(surgical_profile) %>
+              <%= link_to 'Edit', edit_surgical_profile_path(surgical_profile) %>
+              <%= link_to 'Destroy', surgical_profile_path(surgical_profile), method: :delete, data: { confirm: 'Are you sure?' } %>
+            <% end %>
+          </div>
+        </div>
+
+      </div>
+
+      <div class='surgical-profile-detail-hor clear-both'>
+        <div class='clear-both'>
+          Principle Procedure: <%= surgical_profile.principal_procedure %>
+        </div>
+        <div class='clear-both'>
+          Patient Status:
+          <%= SurgicalProfile.get_patient_status_by_index(
+                surgical_profile.patient_status) %>
+        </div>
+        <div class='clear-both'>
+          Elective Surgery:
+          <%= SurgicalProfile.get_elective_surgery_option_by_index(
+                surgical_profile.elective_surgery) %>
+        </div>
+        <div class='clear-both'>
+          Origin Status:
+          <%= SurgicalProfile.get_origin_status_by_index(
+                surgical_profile.origin_status) %>
+        </div>
+        <div class='clear-both'>
+          Hospital Admission Date: <%= surgical_profile.hospital_admission_date %>
+        </div>
+        <div class='clear-both'>
+          Operation Date: <%= surgical_profile.operation_date %>
+        </div>
+        <div class='clear-both'>
+          Anesthesia Technique:
+          <%= SurgicalProfile.get_anesthesia_technique_by_index(
+                surgical_profile.anesthesia_technique) %>
+        </div>
+
+        <div class='clear-both'>
+          Encounter Number: <%= surgical_profile.encounter_number %>
+        </div>
+      </div>
+
+    </div>
   <% end %>
-</p>
+</div>
+
+<div class='clear-both'>
+  <p>
+    <br/>
+    <br/>
+    <% if @came_from_patient_page %>
+      <%= link_to 'New Surgical Profile', new_patient_surgical_profile_path(@patient.id) %>
+    <% else %>
+      <%= link_to 'New Surgical Profile', new_surgical_profile_path %>
+    <% end %>
+  </p>
+</div>

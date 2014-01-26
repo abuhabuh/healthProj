@@ -1,6 +1,6 @@
 /* Shared css file */
 
-/* Constants: TODO break constants out into another file so can be shared 
+/* Constants: TODO break constants out into another file so can be shared
    to more files? */
 $font-size-logo: 2em;
 
@@ -10,6 +10,10 @@ div {
   max-width: inherit;
 }
 
+/* common utility classes */
+.clear-both {
+  clear: both;
+}
 
 /* font weights and designs */
 .font-page-title {
@@ -24,6 +28,28 @@ div {
   }
 
 /* common blocks */
+.common-list-container-hor {
+  float: left;
+}
+
+.common-list-item-container-hor {
+  clear: both;
+  text-align: left;
+  min-width: 600px;
+  padding-top: 15px;
+  padding-left: 10px;
+}
+  .common-main-hor {
+    font-weight: bold;
+    width: 100%;
+  }
+  .common-detail-hor {
+    font-weight: normal;
+    padding-left: 2%;
+    width: 98%;
+  }
+
+
 .page-title { /* remember to include .font-page-title also */
   float: left;
   clear: both;

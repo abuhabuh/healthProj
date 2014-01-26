@@ -2,46 +2,41 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+@import "shared/shared";
 
 .patients-list-container-hor {
-  float: left;
+  @extend .common-list-container-hor;
 }
 
 .patient-container-hor {
-  clear: both;
-  text-align: left;
-  min-width: 600px;
-  padding-top: 15px;
+  @extend .common-list-item-container-hor;
 }
   .patient-main-hor {
-    font-weight: bold;
-    width: 100%;
+    @extend .common-main-hor;
   }
-    .patient-main-hor .row-name {
+    .patient-main-hor .col-name {
       width: 24%;
       padding-left: 1%;
     }
-    .patient-main-hor .row-mrn {
+    .patient-main-hor .col-mrn {
       width: 24%;
       padding-left: 1%;
     }
-    .patient-main-hor .row-dob {
+    .patient-main-hor .col-dob {
       width: 24%;
       padding-left: 1%;
     }
-    .patient-main-hor .row-age {
+    .patient-main-hor .col-age {
       width: 11%;
       padding-left: 1%;
     }
-    .patient-main-hor .row-sex {
+    .patient-main-hor .col-sex {
       width: 12%;
       padding-left: 1%;
     }
 
   .patient-detail-hor {
-    font-weight: normal;
-    padding-left: 2%;
-    width: 98%;
+    @extend common-detail-hor;
   }
     .patient-detail-hor .column1 {
       width: 47%;

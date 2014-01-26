@@ -15,23 +15,25 @@ class SurgicalProfile < ActiveRecord::Base
   # TODO: make interaction with this more graceful? Reduce hard coding
   @@PATIENT_STATUSES = %w(Inpatient Outpatient)
   @@ELECTIVE_SURGERY_OPTIONS = %w(Yes No Unknown)
-  @@ORIGIN_STATUSES = ['Not Transferred, DA from home',
-                       'Acute Care Facility (in-patient)',
-                       'Nursing Home/ Chronic Care/Intermediate care',
-                       'Transfer from Other',
-                       'Transfer from outside ER',
-                       'Unknown'
-                      ]
-  @@ANESTHESIA_TECHNIQUES = ['General',
-                             'Spinal',
-                             'Epidural',
-                             'Regional',
-                             'Local',
-                             'MAC/IV Sedation',
-                             'None',
-                             'Other',
-                             'Unknown'
-                            ]
+  @@ORIGIN_STATUSES = [
+    'Not Transferred, DA from home',
+    'Acute Care Facility (in-patient)',
+    'Nursing Home/ Chronic Care/Intermediate care',
+    'Transfer from Other',
+    'Transfer from outside ER',
+    'Unknown'
+    ]
+  @@ANESTHESIA_TECHNIQUES = [
+    'General',
+    'Spinal',
+    'Epidural',
+    'Regional',
+    'Local',
+    'MAC/IV Sedation',
+    'None',
+    'Other',
+    'Unknown'
+    ]
   ####
   # Validations
   ####
@@ -43,6 +45,20 @@ class SurgicalProfile < ActiveRecord::Base
   # return all surgical profiles that belong to surgeon
   def self.query_surgical_profiles_by_surgeon(user)
     SurgicalProfile.where(user: user)
+  end
+
+  # Returns all surgical profiles associated with patient
+  def self.query_surgical_profiles_by_patient(current_user, patient_id)
+    if current_user.is_admin()
+      return SurgicalProfile.where(
+        surgical_profiles: {patient_id: patient_id}
+        )
+    else
+      surgical_profiles =
+        SurgicalProfile.where(surgical_profiles: {user_id: current_user.id})
+                       .where(surgical_profiles: {patient_id: patient_id})
+      return surgical_profiles
+    end
   end
 
   # Returns surgical profile if it's viewable by current signed in user
@@ -62,9 +78,7 @@ class SurgicalProfile < ActiveRecord::Base
       end
       return surgical_profile
     end
-
   end
-
 
   # return static constants arrays
   def self.get_patient_statuses
@@ -81,6 +95,34 @@ class SurgicalProfile < ActiveRecord::Base
 
   def self.get_anesthesia_techniques
     return @@ANESTHESIA_TECHNIQUES
+  end
+
+  def self.get_patient_status_by_index(index)
+    if index.between?(0, @@PATIENT_STATUSES.length - 1)
+      return @@PATIENT_STATUSES[index]
+    end
+    return ''
+  end
+
+  def self.get_elective_surgery_option_by_index(index)
+    if index.between?(0, @@ELECTIVE_SURGERY_OPTIONS.length - 1)
+      return @@ELECTIVE_SURGERY_OPTIONS[index]
+    end
+    return ''
+  end
+
+  def self.get_origin_status_by_index(index)
+    if index.between?(0, @@ORIGIN_STATUSES.length - 1)
+      return @@ORIGIN_STATUSES[index]
+    end
+    return ''
+  end
+
+  def self.get_anesthesia_technique_by_index(index)
+    if index.between?(0, @@ANESTHESIA_TECHNIQUES.length - 1)
+      return @@ANESTHESIA_TECHNIQUES[index]
+    end
+    return ''
   end
 
   # return static constant nested arrays for selector that includes

@@ -24,6 +24,7 @@ module HealthProj
       'healthcare_providers.css',
       'patients.css',
       'scaffolds.css',
+      'surgical_profiles.css',
       'shared/*',
       'backbone/health_proj.js',
       'backbone/healthcare_providers_includes.js',

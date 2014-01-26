@@ -1,3 +1,33 @@
 // Place all the styles related to the SurgicalProfiles controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+@import "shared/shared";
+
+.surgical-profiles-list-container-hor {
+  @extend .common-list-container-hor;
+}
+
+.surgical-profile-container-hor {
+  @extend .common-list-item-container-hor;
+}
+  .surgical-profile-main-hor {
+    @extend .common-main-hor;
+  }
+    .surgical-profile-main-hor .col-cpt-code {
+      width: 59%;
+      padding-left: 1%;
+    }
+    .surgical-profile-main-hor .control-links {
+      // needs to contain the show, edit, delete links
+      width: 29%;
+      padding-left: 1%;
+      float: right;
+      font-weight: normal;
+      // TODO: get this formatting figured out more gracefully;
+      min-width: 150px;
+    }
+  .surgical-profile-detail-hor {
+    @extend .common-detail-hor;
+  }
+
