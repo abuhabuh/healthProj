@@ -24,6 +24,10 @@ class User < ActiveRecord::Base
                .where(roles: {name: UserRole::ROLE_SURGEON})
   end
 
+  def self.query_one_surgeon_by_id(surgeon_id)
+    return User.find(surgeon_id)
+  end
+
   # return nested arrays for surgeons and their ids for rails selector
   # - [['John Doe', 1], ['Jim Beam', 2]] -> text is mapped to index
   #   in the static constants array

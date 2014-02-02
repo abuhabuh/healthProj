@@ -1,4 +1,5 @@
 class HealthcareProvidersController < ApplicationController
+  before_filter :authenticate_user!
   before_action :set_healthcare_provider, only: [:show, :edit, :update, :destroy]
   authorize_resource
 

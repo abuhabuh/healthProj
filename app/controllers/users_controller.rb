@@ -9,7 +9,7 @@ class UsersController < ApplicationController
     #   is not setup yet)
     if current_user.is_surgeon()
       @user_surgeon_profile =
-        UserSurgeonProfile.query_user_surgeon_profile(user_params[:id])
+        UserSurgeonProfile.query_one_by_user_id(user_params[:id])
 
       @surgeon_specialty_name = 'Not set'
       if @user_surgeon_profile

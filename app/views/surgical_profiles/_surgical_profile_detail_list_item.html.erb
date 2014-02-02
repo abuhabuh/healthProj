@@ -1,0 +1,68 @@
+<div class='surgical-profile-container-hor clear-both'>
+
+  <%# Display headers %>
+  <div class='surgical-profile-main-hor clear-both'>
+    <% if defined? surgeon %>
+      Surgeon:
+      <%= surgeon.first_name %> <%= surgeon.last_name %>
+    <% end %>
+  </div>
+  <div class='surgical-profile-main-hor clear-both'>
+    <div class='col-cpt-code'>
+      Profile CPT Code: <%= surgical_profile.cpt_code %>
+      <div class='control-links'>
+        <%= link_to 'Show me',
+              patient_surgical_profile_path(
+                patient,
+                surgical_profile,
+                :sp_view_mode => SurgicalProfilesController::SP_VIEW_GENERAL
+                )
+        %>
+        <%= link_to 'Edit',
+              edit_patient_surgical_profile_path(patient, surgical_profile) %>
+        <%= link_to 'Destroy',
+              patient_surgical_profile_path(patient, surgical_profile),
+              method: :delete,
+              data: { confirm: 'Are you sure?' } %>
+      </div>
+    </div>
+  </div>
+
+  <%# Display body %>
+  <div class='surgical-profile-detail-hor clear-both'>
+    <div class='clear-both'>
+      Principle Procedure: <%= surgical_profile.principal_procedure %>
+    </div>
+    <div class='clear-both'>
+      Patient Status:
+      <%= SurgicalProfile.get_patient_status_by_index(
+            surgical_profile.patient_status) %>
+    </div>
+    <div class='clear-both'>
+      Elective Surgery:
+      <%= SurgicalProfile.get_elective_surgery_option_by_index(
+            surgical_profile.elective_surgery) %>
+    </div>
+    <div class='clear-both'>
+      Origin Status:
+      <%= SurgicalProfile.get_origin_status_by_index(
+            surgical_profile.origin_status) %>
+    </div>
+    <div class='clear-both'>
+      Hospital Admission Date: <%= surgical_profile.hospital_admission_date %>
+    </div>
+    <div class='clear-both'>
+      Operation Date: <%= surgical_profile.operation_date %>
+    </div>
+    <div class='clear-both'>
+      Anesthesia Technique:
+      <%= SurgicalProfile.get_anesthesia_technique_by_index(
+            surgical_profile.anesthesia_technique) %>
+    </div>
+
+    <div class='clear-both'>
+      Encounter Number: <%= surgical_profile.encounter_number %>
+    </div>
+  </div>
+
+</div>

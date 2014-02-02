@@ -10,7 +10,7 @@ class UserSurgeonProfile < ActiveRecord::Base
   ###
 
   # Returns surgeon profile object or Nil if not found
-  def self.query_user_surgeon_profile(user_id)
+  def self.query_one_by_user_id(user_id)
     return UserSurgeonProfile.where(user_id: user_id).first
   end
 

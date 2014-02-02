@@ -1,0 +1,52 @@
+<div class='clear-both'>
+  <div class='font-page-title'>
+    Patient:
+    <%= @patient.last_name %>, <%= @patient.first_name %>
+  </div>
+  <br/>
+  Surgical Profile CPT: <%= @surgical_profile.cpt_code %>
+</div>
+<div class='surgical-profiles-tabs-container-hor clear-both'>
+
+  <%= link_to 'General Info',
+        patient_surgical_profile_path(
+          @patient,
+          @surgical_profile,
+          :sp_view_mode =>
+            SurgicalProfilesController::SP_VIEW_GENERAL
+          )
+  %> |
+  <%= link_to 'Pre-op Assessment',
+        patient_surgical_profile_path(
+          @patient,
+          @surgical_profile,
+          :sp_view_mode =>
+            SurgicalProfilesController::SP_VIEW_PREOP_ASSESSMENT
+          )
+  %> |
+  <%= link_to 'Operative Info',
+        patient_surgical_profile_path(
+          @patient,
+          @surgical_profile,
+          :sp_view_mode =>
+            SurgicalProfilesController::SP_VIEW_OPERATIVE
+          )
+  %> |
+  <%= link_to 'Discharge Info',
+        patient_surgical_profile_path(
+          @patient,
+          @surgical_profile,
+          :sp_view_mode =>
+            SurgicalProfilesController::SP_VIEW_DISCHARGE
+          )
+  %> |
+  <%= link_to 'Followup Info',
+        patient_surgical_profile_path(
+          @patient,
+          @surgical_profile,
+          :sp_view_mode =>
+            SurgicalProfilesController::SP_VIEW_FOLLOW_UP
+          )
+  %>
+
+</div>

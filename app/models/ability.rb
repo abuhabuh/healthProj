@@ -10,6 +10,7 @@ class Ability
       can :manage, Patient
       can :manage, UserSurgeonProfile
       can :manage, SurgicalProfile
+      can :manage, PreopRiskAssessment
     end
 
 

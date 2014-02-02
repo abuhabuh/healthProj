@@ -72,7 +72,7 @@ class PatientsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_patient
-      @patient = Patient.query_patient_by_id(current_user, params[:id])
+      @patient = Patient.query_one_by_id(current_user, params[:id])
     end
 
     # Never trust parameters from the scary internet, only allow the white

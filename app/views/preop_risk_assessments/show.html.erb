@@ -1,0 +1,39 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Surgical profile:</strong>
+  <%= @preop_risk_assessment.surgical_profile %>
+</p>
+
+<p>
+  <strong>Bit field:</strong>
+  <%= @preop_risk_assessment.bit_field %>
+</p>
+
+<p>
+  <strong>Height:</strong>
+  <%= @preop_risk_assessment.height %>
+</p>
+
+<p>
+  <strong>Weight:</strong>
+  <%= @preop_risk_assessment.weight %>
+</p>
+
+<p>
+  <strong>Diabetes mellitus:</strong>
+  <%= @preop_risk_assessment.diabetes_mellitus %>
+</p>
+
+<p>
+  <strong>Functional health status:</strong>
+  <%= @preop_risk_assessment.functional_health_status %>
+</p>
+
+<p>
+  <strong>Sepsis within 48hrs:</strong>
+  <%= @preop_risk_assessment.sepsis_within_48hrs %>
+</p>
+
+<%= link_to 'Edit', edit_preop_risk_assessment_path(@preop_risk_assessment) %> |
+<%= link_to 'Back', preop_risk_assessments_path %>

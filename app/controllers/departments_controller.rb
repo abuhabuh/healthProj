@@ -1,9 +1,10 @@
 class DepartmentsController < ApplicationController
   # Not calling authenticate user because departments is loaded with other obj
-  #  and user should be authenticated already. 
+  #  and user should be authenticated already.
   #  TODO: call authenticate anyways?
   #  TODO: match these filters with cann'd rails filters
   #    - see surgical_profiles_controller.rb
+  before_filter :authenticate_user!
   before_action :set_healthcare_provider
   respond_to :html, :xml, :json
   authorize_resource

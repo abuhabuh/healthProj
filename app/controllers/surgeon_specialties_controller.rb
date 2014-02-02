@@ -1,4 +1,5 @@
 class SurgeonSpecialtiesController < ApplicationController
+  before_filter :authenticate_user!
   before_action :set_surgeon_specialty, only: [:show, :edit, :update, :destroy]
   authorize_resource
 

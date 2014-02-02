@@ -1,6 +1,11 @@
 ###
 # Patients class
 #
+# IMPORTANT:
+# - Patient data access MUST be controlled by current_user access
+#   privilege: current_user must be a surgeon and must be assigned
+#   to one of patient's surgical profile
+#
 # DB Table
 # - Most fields encrypted - db column names:
 #   - encrypted_medical_record_id
@@ -67,7 +72,7 @@ class Patient < ActiveRecord::Base
   def self.query_all_patients(current_user)
     if current_user.is_admin()
       patients = Patient.all
-    else
+    elsif current_user.is_surgeon()
       patients = Patient.joins(:surgical_profiles)
                         .where(surgical_profiles: {user_id: current_user.id})
     end
@@ -78,10 +83,10 @@ class Patient < ActiveRecord::Base
 
   # Returns patient if it's viewable by current signed in user
   # Exception is raised if not viewable
-  def self.query_patient_by_id(current_user, patient_id)
+  def self.query_one_by_id(current_user, patient_id)
     if current_user.is_admin()
       patient = Patient.find(patient_id)
-    else
+    elsif current_user.is_surgeon()
       patient = Patient.joins(:surgical_profiles)
                        .where(patients: {id: patient_id})
                        .where(surgical_profiles: {user_id: current_user.id})
@@ -104,8 +109,8 @@ class Patient < ActiveRecord::Base
 
   # Returns surgical profiles viewable by current signed in user
   # TEST - http://localhost:3000/patients/17/surgical_profiles
-  def query_surgical_profiles(current_user)
-    return SurgicalProfile.query_surgical_profiles_by_patient(
+  def query_surgical_profiles_inc_patients(current_user)
+    return SurgicalProfile.query_all_by_patient_id_inc_patients(
       current_user, self.id
       )
   end

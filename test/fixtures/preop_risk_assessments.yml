@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  surgical_profile_id: 
+  bit_field: 1
+  height: 9.99
+  weight: 9.99
+  diabetes_mellitus: 1
+  functional_health_status: 1
+  sepsis_within_48hrs: 1
+
+two:
+  surgical_profile_id: 
+  bit_field: 1
+  height: 9.99
+  weight: 9.99
+  diabetes_mellitus: 1
+  functional_health_status: 1
+  sepsis_within_48hrs: 1

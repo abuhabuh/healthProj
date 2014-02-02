@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140120183754) do
+ActiveRecord::Schema.define(version: 20140126093046) do
 
   create_table "countries", force: true do |t|
     t.string   "name"
@@ -112,6 +112,20 @@ ActiveRecord::Schema.define(version: 20140120183754) do
   add_index "patients", ["language_id"], name: "patients_language_id_fk", using: :btree
   add_index "patients", ["race_id"], name: "patients_race_id_fk", using: :btree
 
+  create_table "preop_risk_assessments", force: true do |t|
+    t.integer  "surgical_profile_id"
+    t.integer  "bit_field"
+    t.decimal  "height",                   precision: 7, scale: 4
+    t.decimal  "weight",                   precision: 7, scale: 4
+    t.integer  "diabetes_mellitus"
+    t.integer  "functional_health_status"
+    t.integer  "sepsis_within_48hrs"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "preop_risk_assessments", ["surgical_profile_id"], name: "index_preop_risk_assessments_on_surgical_profile_id", using: :btree
+
   create_table "races", force: true do |t|
     t.string   "encrypted_name"
     t.datetime "created_at"
@@ -142,12 +156,16 @@ ActiveRecord::Schema.define(version: 20140120183754) do
     t.string   "principal_procedure"
     t.string   "cpt_code"
     t.integer  "origin_status"
-    t.datetime "hospital_admission_date"
-    t.datetime "operation_date"
     t.integer  "anesthesia_technique"
     t.integer  "encounter_number"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "encrypted_hospital_admission_date"
+    t.string   "encrypted_operation_date"
+    t.string   "encrypted_hospital_admission_date_salt"
+    t.string   "encrypted_hospital_admission_date_iv"
+    t.string   "encrypted_operation_date_salt"
+    t.string   "encrypted_operation_date_iv"
   end
 
   add_index "surgical_profiles", ["patient_id"], name: "index_surgical_profiles_on_patient_id", using: :btree
@@ -201,6 +219,8 @@ ActiveRecord::Schema.define(version: 20140120183754) do
   add_foreign_key "patients", "ethnicities", name: "patients_ethnicity_id_fk"
   add_foreign_key "patients", "languages", name: "patients_language_id_fk"
   add_foreign_key "patients", "races", name: "patients_race_id_fk"
+
+  add_foreign_key "preop_risk_assessments", "surgical_profiles", name: "preop_risk_assessments_surgical_profile_id_fk"
 
   add_foreign_key "surgical_profiles", "patients", name: "surgical_profiles_patient_id_fk"
   add_foreign_key "surgical_profiles", "users", name: "surgical_profiles_user_id_fk"

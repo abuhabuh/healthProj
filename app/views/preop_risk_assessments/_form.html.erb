@@ -1,0 +1,216 @@
+<div class='preop-risk-assessment-form clear-both'>
+
+  <%= form_for [@surgical_profile, @preop_risk_assessment] do |f| %>
+    <% if @preop_risk_assessment.errors.any? %>
+      <div id='error_explanation'>
+        <h2><%= pluralize(@preop_risk_assessment.errors.count, 'error') %> prohibited this preop_risk_assessment from being saved:</h2>
+
+        <ul>
+        <% @preop_risk_assessment.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <div class='clear-both'>
+      <%= @surgical_profile.cpt_code %>
+    </div>
+    <div class='field clear-both'>
+      <%= f.label :height %><br>
+      <%= f.text_field :height %>
+    </div>
+    <div class='field clear-both'>
+      <%= f.label :weight %><br>
+      <%= f.text_field :weight %>
+    </div>
+    <div class='field clear-both'>
+      <%= f.label :diabetes_mellitus %><br>
+      <%= f.select :diabetes_mellitus,
+            PreopRiskAssessment.get_diabetes_mellitus_options_select() %>
+    </div>
+    <div class='field clear-both'>
+      <%= f.label :functional_health_status %><br>
+      <%= f.select :functional_health_status,
+            PreopRiskAssessment.get_functional_health_options_select() %>
+    </div>
+    <div class='field clear-both'>
+      <%= f.label :sepsis_within_48hrs %><br>
+      <%= f.select :sepsis_within_48hrs,
+            PreopRiskAssessment.get_sepsis_within_48hrs_options_select() %>
+    </div>
+
+    <%# Bit fields %>
+
+    <div class='field clear-both'>
+      <%= f.label :current_smoker_within_1yr %><br>
+      <%= f.radio_button :current_smoker_within_1yr, 'true' %>
+      <%= f.label :current_smoker_within_1yr_true, 'True' %>
+      <%= f.radio_button :current_smoker_within_1yr, 'false' %>
+      <%= f.label :current_smoker_within_1yr_false, 'False' %>
+    </div>
+    <div class='field clear-both'>
+      <%= f.label :dyspnea_1yr %><br>
+      <%= f.radio_button :dyspnea_1yr, 'true' %>
+      <%= f.label :dyspnea_1yr_true, 'True' %>
+      <%= f.radio_button :dyspnea_1yr, 'false' %>
+      <%= f.label :dyspnea_1yr_false, 'False' %>
+    </div>
+    <div class='field clear-both'>
+      <%= f.label :ventilator_dependent_within_48hrs %><br>
+      <%= f.radio_button :ventilator_dependent_within_48hrs, 'true' %>
+      <%= f.label :ventilator_dependent_within_48hrs_true, 'True' %>
+      <%= f.radio_button :ventilator_dependent_within_48hrs, 'false' %>
+      <%= f.label :ventilator_dependent_within_48hrs_false, 'False' %>
+
+    </div>
+    <div class='field clear-both'>
+          <%= f.label :history_of_severe_copd %><br>
+      <%= f.radio_button :history_of_severe_copd, 'true' %>
+      <%= f.label :history_of_severe_copd_true, 'True' %>
+      <%= f.radio_button :history_of_severe_copd, 'false' %>
+      <%= f.label :history_of_severe_copd_false, 'False' %>
+
+    </div>
+    <div class='field clear-both'>
+          <%= f.label :ascites_within_30days %><br>
+      <%= f.radio_button :ascites_within_30days, 'true' %>
+      <%= f.label :ascites_within_30days_true, 'True' %>
+      <%= f.radio_button :ascites_within_30days, 'false' %>
+      <%= f.label :ascites_within_30days_false, 'False' %>
+
+    </div>
+    <div class='field clear-both'>
+          <%= f.label :chf_within_30days %><br>
+      <%= f.radio_button :chf_within_30days, 'true' %>
+      <%= f.label :chf_within_30days_true, 'True' %>
+      <%= f.radio_button :chf_within_30days, 'false' %>
+      <%= f.label :chf_within_30days_false, 'False' %>
+
+    </div>
+    <div class='field clear-both'>
+          <%= f.label :hypertension_requiring_medications %><br>
+      <%= f.radio_button :hypertension_requiring_medications, 'true' %>
+      <%= f.label :hypertension_requiring_medications_true, 'True' %>
+      <%= f.radio_button :hypertension_requiring_medications, 'false' %>
+      <%= f.label :hypertension_requiring_medications_false, 'False' %>
+
+    </div>
+    <div class='field clear-both'>
+          <%= f.label :acute_renal_failure %><br>
+      <%= f.radio_button :acute_renal_failure, 'true' %>
+      <%= f.label :acute_renal_failure_true, 'True' %>
+      <%= f.radio_button :acute_renal_failure, 'false' %>
+      <%= f.label :acute_renal_failure_false, 'False' %>
+
+    </div>
+    <div class='field clear-both'>
+          <%= f.label :requiring_dialysis_within_2wks %><br>
+      <%= f.radio_button :requiring_dialysis_within_2wks, 'true' %>
+      <%= f.label :requiring_dialysis_within_2wks_true, 'True' %>
+      <%= f.radio_button :requiring_dialysis_within_2wks, 'false' %>
+      <%= f.label :requiring_dialysis_within_2wks_false, 'False' %>
+
+    </div>
+    <div class='field clear-both'>
+          <%= f.label :dis_ca %><br>
+      <%= f.radio_button :dis_ca, 'true' %>
+      <%= f.label :dis_ca_true, 'True' %>
+      <%= f.radio_button :dis_ca, 'false' %>
+      <%= f.label :dis_ca_false, 'False' %>
+
+    </div>
+    <div class='field clear-both'>
+          <%= f.label :open_wound %><br>
+      <%= f.radio_button :open_wound, 'true' %>
+      <%= f.label :open_wound_true, 'True' %>
+      <%= f.radio_button :open_wound, 'false' %>
+      <%= f.label :open_wound_false, 'False' %>
+
+    </div>
+    <div class='field clear-both'>
+          <%= f.label :steriod_or_immunosuppressant_for_chronic %><br>
+      <%= f.radio_button :steriod_or_immunosuppressant_for_chronic, 'true' %>
+      <%= f.label :steriod_or_immunosuppressant_for_chronic_true, 'True' %>
+      <%= f.radio_button :steriod_or_immunosuppressant_for_chronic, 'false' %>
+      <%= f.label :steriod_or_immunosuppressant_for_chronic_false, 'False' %>
+
+    </div>
+    <div class='field clear-both'>
+          <%= f.label :significant_body_weight_loss_last_6mos %><br>
+      <%= f.radio_button :significant_body_weight_loss_last_6mos, 'true' %>
+      <%= f.label :significant_body_weight_loss_last_6mos_true, 'True' %>
+      <%= f.radio_button :significant_body_weight_loss_last_6mos, 'false' %>
+      <%= f.label :significant_body_weight_loss_last_6mos_false, 'False' %>
+
+    </div>
+    <div class='field clear-both'>
+          <%= f.label :bleeding_disorders %><br>
+      <%= f.radio_button :bleeding_disorders, 'true' %>
+      <%= f.label :bleeding_disorders_true, 'True' %>
+      <%= f.radio_button :bleeding_disorders, 'false' %>
+      <%= f.label :bleeding_disorders_false, 'False' %>
+
+    </div>
+    <div class='field clear-both'>
+          <%= f.label :preop_transfusion_rbc_within_72hrs %><br>
+      <%= f.radio_button :preop_transfusion_rbc_within_72hrs, 'true' %>
+      <%= f.label :preop_transfusion_rbc_within_72hrs_true, 'True' %>
+      <%= f.radio_button :preop_transfusion_rbc_within_72hrs, 'false' %>
+      <%= f.label :preop_transfusion_rbc_within_72hrs_false, 'False' %>
+
+    </div>
+    <div class='field clear-both'>
+          <%= f.label :gerd_meds_within_30days %><br>
+      <%= f.radio_button :gerd_meds_within_30days, 'true' %>
+      <%= f.label :gerd_meds_within_30days_true, 'True' %>
+      <%= f.radio_button :gerd_meds_within_30days, 'false' %>
+      <%= f.label :gerd_meds_within_30days_false, 'False' %>
+
+    </div>
+    <div class='field clear-both'>
+          <%= f.label :gallstone_disease %><br>
+      <%= f.radio_button :gallstone_disease, 'true' %>
+      <%= f.label :gallstone_disease_true, 'True' %>
+      <%= f.radio_button :gallstone_disease, 'false' %>
+      <%= f.label :gallstone_disease_false, 'False' %>
+
+    </div>
+    <div class='field clear-both'>
+          <%= f.label :ambulation_limited %><br>
+      <%= f.radio_button :ambulation_limited, 'true' %>
+      <%= f.label :ambulation_limited_true, 'True' %>
+      <%= f.radio_button :ambulation_limited, 'false' %>
+      <%= f.label :ambulation_limited_false, 'False' %>
+
+    </div>
+    <div class='field clear-both'>
+          <%= f.label :activity_limited_by_pain %><br>
+      <%= f.radio_button :activity_limited_by_pain, 'true' %>
+      <%= f.label :activity_limited_by_pain_true, 'True' %>
+      <%= f.radio_button :activity_limited_by_pain, 'false' %>
+      <%= f.label :activity_limited_by_pain_false, 'False' %>
+
+    </div>
+    <div class='field clear-both'>
+          <%= f.label :requires_daily_medication %><br>
+      <%= f.radio_button :requires_daily_medication, 'true' %>
+      <%= f.label :requires_daily_medication_true, 'True' %>
+      <%= f.radio_button :requires_daily_medication, 'false' %>
+      <%= f.label :requires_daily_medication_false, 'False' %>
+
+    </div>
+    <div class='field clear-both'>
+          <%= f.label :surgical_intervention_planned_or_performed %><br>
+      <%= f.radio_button :surgical_intervention_planned_or_performed, 'true' %>
+      <%= f.label :surgical_intervention_planned_or_performed_true, 'True' %>
+      <%= f.radio_button :surgical_intervention_planned_or_performed, 'false' %>
+      <%= f.label :surgical_intervention_planned_or_performed_false, 'False' %>
+
+    </div>
+
+    <div class='actions clear-both'>
+      <%= f.submit %>
+    </div>
+  <% end %>
+</div>

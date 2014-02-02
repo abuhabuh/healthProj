@@ -2,86 +2,38 @@
   <%= stylesheet_link_tag "surgical_profiles", media: "all" %>
 <% end %>
 
-
 <div class='surgical-profiles-list-container-hor clear-both'>
   <div class='font-page-title clear-both'>
-    <% if @came_from_patient_page %>
-      Surgical Profiles for Patient: <%= @patient.first_name %> <%= @patient.last_name %>
+    <%# If surgeon is defined, then we are displaying surgical
+          profiles for a surgeon, else we are displaying for a
+          patient %>
+    <% if @surgeon %>
+      Surgical Profiles belonging to Surgeon:
+      <%= @surgeon.first_name %>
+      <%= @surgeon.last_name %>
+    <% elsif @patient %>
+      Surgical Profiles for Patient:
+      <%= @patient.first_name %>
+      <%= @patient.last_name %>
     <% else %>
-      Surgical Profiles belonging to Surgeon: <%= current_user.first_name %> <%= current_user.last_name %>
+      <%# TODO: throw error and handle correctly %>
     <% end %>
   </div>
 
   <% @surgical_profiles.each do |surgical_profile| %>
-
-    <div class='surgical-profile-container-hor clear-both'>
-
-      <div class='surgical-profile-main-hor clear-both'>
-        <div class='col-cpt-code'>
-          Profile CPT Code: <%= surgical_profile.cpt_code %>
-          <div class='control-links'>
-            <% if @came_from_patient_page %>
-              <%= link_to 'Show', patient_surgical_profile_path(@patient, surgical_profile) %>
-              <%= link_to 'Edit', edit_patient_surgical_profile_path(@patient, surgical_profile) %>
-              <%= link_to 'Destroy', patient_surgical_profile_path(@patient, surgical_profile), method: :delete, data: { confirm: 'Are you sure?' } %>
-            <% else %>
-              <%= link_to 'Show', surgical_profile_path(surgical_profile) %>
-              <%= link_to 'Edit', edit_surgical_profile_path(surgical_profile) %>
-              <%= link_to 'Destroy', surgical_profile_path(surgical_profile), method: :delete, data: { confirm: 'Are you sure?' } %>
-            <% end %>
-          </div>
-        </div>
-
-      </div>
-
-      <div class='surgical-profile-detail-hor clear-both'>
-        <div class='clear-both'>
-          Principle Procedure: <%= surgical_profile.principal_procedure %>
-        </div>
-        <div class='clear-both'>
-          Patient Status:
-          <%= SurgicalProfile.get_patient_status_by_index(
-                surgical_profile.patient_status) %>
-        </div>
-        <div class='clear-both'>
-          Elective Surgery:
-          <%= SurgicalProfile.get_elective_surgery_option_by_index(
-                surgical_profile.elective_surgery) %>
-        </div>
-        <div class='clear-both'>
-          Origin Status:
-          <%= SurgicalProfile.get_origin_status_by_index(
-                surgical_profile.origin_status) %>
-        </div>
-        <div class='clear-both'>
-          Hospital Admission Date: <%= surgical_profile.hospital_admission_date %>
-        </div>
-        <div class='clear-both'>
-          Operation Date: <%= surgical_profile.operation_date %>
-        </div>
-        <div class='clear-both'>
-          Anesthesia Technique:
-          <%= SurgicalProfile.get_anesthesia_technique_by_index(
-                surgical_profile.anesthesia_technique) %>
-        </div>
-
-        <div class='clear-both'>
-          Encounter Number: <%= surgical_profile.encounter_number %>
-        </div>
-      </div>
-
-    </div>
+    <%= render partial: 'surgical_profile_detail_list_item',
+          locals: {surgical_profile: surgical_profile,
+                   patient: surgical_profile.patient} %>
   <% end %>
 </div>
 
-<div class='clear-both'>
-  <p>
-    <br/>
-    <br/>
-    <% if @came_from_patient_page %>
-      <%= link_to 'New Surgical Profile', new_patient_surgical_profile_path(@patient.id) %>
-    <% else %>
-      <%= link_to 'New Surgical Profile', new_surgical_profile_path %>
-    <% end %>
-  </p>
-</div>
+<% if @patient %>
+  <div class='clear-both'>
+    <p>
+      <br/>
+      <br/>
+      <%= link_to 'New Surgical Profile',
+            new_patient_surgical_profile_path(@patient.id) %>
+    </p>
+  </div>
+<% end %>

@@ -5,11 +5,24 @@
 # - fields are: patient_status, elective_surgery_option, origin_status,
 #     anesthesia_technique
 # - represented as integers [0 to n-1] in database and mapped to strings
+#
+# DB Table
+# - Encrypted Fields
+#   - hospital_admission_date
+#   - operation_date
 ##
 
 class SurgicalProfile < ActiveRecord::Base
+
+  include EncryptionKey
+
   belongs_to :patient
   belongs_to :user
+  has_one :preop_risk_assessment
+
+  # Encryption
+  attr_encrypted :hospital_admission_date, :key => :encryption_key
+  attr_encrypted :operation_date, :key => :encryption_key
 
   # Static class variables
   # TODO: make interaction with this more graceful? Reduce hard coding
@@ -43,37 +56,58 @@ class SurgicalProfile < ActiveRecord::Base
   ####
 
   # return all surgical profiles that belong to surgeon
-  def self.query_surgical_profiles_by_surgeon(user)
-    SurgicalProfile.where(user: user)
+  def self.query_all_by_surgeon(surgeon)
+    return SurgicalProfile.where(user: surgeon)
+  end
+
+  def self.query_all_by_surgeon_inc_patients(surgeon)
+    return SurgicalProfile.where(user: surgeon).includes(:patient)
   end
 
   # Returns all surgical profiles associated with patient
-  def self.query_surgical_profiles_by_patient(current_user, patient_id)
-    if current_user.is_admin()
+  def self.query_all_by_patient_id(surgeon, patient_id)
+    if surgeon.is_admin()
       return SurgicalProfile.where(
         surgical_profiles: {patient_id: patient_id}
         )
     else
       surgical_profiles =
-        SurgicalProfile.where(surgical_profiles: {user_id: current_user.id})
+        SurgicalProfile.where(surgical_profiles: {user_id: surgeon.id})
                        .where(surgical_profiles: {patient_id: patient_id})
+      return surgical_profiles
+    end
+  end
+
+  def self.query_all_by_patient_id_inc_patients(surgeon, patient_id)
+    if surgeon.is_admin()
+      return SurgicalProfile.where(
+                surgical_profiles: {patient_id: patient_id})
+              .includes(:patient)
+
+    else
+      surgical_profiles =
+        SurgicalProfile.where(surgical_profiles: {user_id: surgeon.id})
+                       .where(surgical_profiles: {patient_id: patient_id})
+                       .includes(:patient)
       return surgical_profiles
     end
   end
 
   # Returns surgical profile if it's viewable by current signed in user
   # Exception is raised if not viewable
-  def self.query_surgical_profile_by_id(current_user, surgical_profile_id)
-    if current_user.is_admin()
+  def self.query_one_by_id(surgeon, surgical_profile_id)
+    if surgeon.is_admin()
       return SurgicalProfile.find(surgical_profile_id)
     else
       surgical_profile =
         SurgicalProfile.where(surgical_profiles: {id: surgical_profile_id})
-                       .where(surgical_profiles: {user_id: current_user.id})
+                       .where(surgical_profiles: {user_id: surgeon.id})
                        .first
       if surgical_profile.nil?
         raise CanCan::AccessDenied.new(
-          "Not authorized to view this surgical profile data!", :read, SurgicalProfile
+          "Not authorized to view this surgical profile data!",
+          :read,
+          SurgicalProfile
           )
       end
       return surgical_profile
@@ -149,9 +183,50 @@ class SurgicalProfile < ActiveRecord::Base
   # Instance methods
   ####
 
-  # Returns string representation of patient_status
-  def get_patient_status_string
-    return @@PATIENT_STATUSES[patient_status]
+  # Wrapper for save function that transforms date attributes to
+  #   string for encryption
+  def preprocess_and_save
+    process_attrs_before_write(self)
+    return self.save()
   end
+
+  # Wrapper for update function that transforms date attributes to
+  #   string for encryption
+  def preprocess_and_update(surgical_profile_params)
+    process_attrs_before_write_params(surgical_profile_params)
+    puts "@@@@"
+    puts surgical_profile_params
+    return self.update(surgical_profile_params)
+  end
+
+
+  private
+    ###
+    # Instance methods
+    ###
+
+    # Convert certain attrs for write to DB (due to encryption needs)
+    def process_attrs_before_write(surgical_profile)
+      if surgical_profile.hospital_admission_date
+        surgical_profile.hospital_admission_date =
+          surgical_profile.hospital_admission_date.to_s
+      end
+      if surgical_profile.operation_date
+        surgical_profile.operation_date =
+          surgical_profile.operation_date.to_s
+      end
+    end
+
+    # Convert certain attrs for write to DB (due to encryption needs)
+    def process_attrs_before_write_params(surgical_profile_params)
+      if surgical_profile_params[:hospital_admission_date].present?
+        surgical_profile_params[:hospital_admission_date] =
+          surgical_profile_params[:hospital_admission_date].to_s
+      end
+      if surgical_profile_params[:operation_date].present?
+        surgical_profile_params[:operation_date] =
+          surgical_profile_params[:operation_date].to_s
+      end
+    end
 
 end

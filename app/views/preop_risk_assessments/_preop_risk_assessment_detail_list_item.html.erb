@@ -1,0 +1,151 @@
+<div class='preop-risk-assessment-container-vert clear-both'>
+
+<p>
+  <strong>Height:</strong>
+  <%= preop_risk_assessment.height_ft_str() %>
+</p>
+
+<p>
+  <strong>Weight:</strong>
+  <%= preop_risk_assessment.weight_lb_str() %>
+</p>
+
+<p>
+  <strong>BMI:</strong>
+  <%= preop_risk_assessment.body_mass_index_eng_str() %>
+</p>
+
+<p>
+  <strong>Diabetes mellitus:</strong>
+  <%= PreopRiskAssessment.get_diabetes_mellitus_option_by_index(
+        preop_risk_assessment.diabetes_mellitus) %>
+</p>
+
+<p>
+  <strong>Functional health status:</strong>
+  <%= PreopRiskAssessment.get_functional_health_option_by_index(
+        preop_risk_assessment.functional_health_status) %>
+</p>
+
+<p>
+  <strong>Sepsis within 48hrs:</strong>
+  <%= PreopRiskAssessment.get_sepsis_within_48hrs_option_by_index(
+        preop_risk_assessment.sepsis_within_48hrs) %>
+</p>
+
+<%# Bit fields %>
+
+<p>
+  <strong> current_smoker_within_1yr: </strong>
+  <%= preop_risk_assessment.current_smoker_within_1yr %>
+</p>
+
+<p>
+  <strong> dyspnea_1yr: </strong>
+  <%= preop_risk_assessment.dyspnea_1yr %>
+</p>
+
+<p>
+  <strong> ventilator_dependent_within_48hrs: </strong>
+  <%= preop_risk_assessment.ventilator_dependent_within_48hrs %>
+</p>
+
+<p>
+  <strong> history_of_severe_copd: </strong>
+  <%= preop_risk_assessment.history_of_severe_copd %>
+</p>
+
+<p>
+  <strong> ascites_within_30days: </strong>
+  <%= preop_risk_assessment.ascites_within_30days %>
+</p>
+
+<p>
+  <strong> chf_within_30days: </strong>
+  <%= preop_risk_assessment.chf_within_30days %>
+</p>
+
+<p>
+  <strong> hypertension_requiring_medications: </strong>
+  <%= preop_risk_assessment.hypertension_requiring_medications %>
+</p>
+
+<p>
+  <strong> acute_renal_failure: </strong>
+  <%= preop_risk_assessment.acute_renal_failure %>
+</p>
+
+<p>
+  <strong> requiring_dialysis_within_2wks: </strong>
+  <%= preop_risk_assessment.requiring_dialysis_within_2wks %>
+</p>
+
+<p>
+  <strong> dis_ca: </strong>
+  <%= preop_risk_assessment.dis_ca %>
+</p>
+
+<p>
+  <strong> open_wound: </strong>
+  <%= preop_risk_assessment.open_wound %>
+</p>
+
+<p>
+  <strong> steriod_or_immunosuppressant_for_chronic: </strong>
+  <%= preop_risk_assessment.steriod_or_immunosuppressant_for_chronic %>
+</p>
+
+<p>
+  <strong> significant_body_weight_loss_last_6mos: </strong>
+  <%= preop_risk_assessment.significant_body_weight_loss_last_6mos %>
+</p>
+
+<p>
+  <strong> bleeding_disorders: </strong>
+  <%= preop_risk_assessment.bleeding_disorders %>
+</p>
+
+<p>
+  <strong> preop_transfusion_rbc_within_72hrs: </strong>
+  <%= preop_risk_assessment.preop_transfusion_rbc_within_72hrs %>
+</p>
+
+<p>
+  <strong> gerd_meds_within_30days: </strong>
+  <%= preop_risk_assessment.gerd_meds_within_30days %>
+</p>
+
+<p>
+  <strong> gallstone_disease: </strong>
+  <%= preop_risk_assessment.gallstone_disease %>
+</p>
+
+<p>
+  <strong> ambulation_limited: </strong>
+  <%= preop_risk_assessment.ambulation_limited %>
+</p>
+
+<p>
+  <strong> activity_limited_by_pain: </strong>
+  <%= preop_risk_assessment.activity_limited_by_pain %>
+</p>
+
+<p>
+  <strong> requires_daily_medication: </strong>
+  <%= preop_risk_assessment.requires_daily_medication %>
+</p>
+
+<p>
+  <strong> surgical_intervention_planned_or_performed: </strong>
+  <%= preop_risk_assessment.surgical_intervention_planned_or_performed %>
+</p>
+
+<%= link_to 'edit', edit_surgical_profile_preop_risk_assessment_path(
+                      surgical_profile.id, preop_risk_assessment.id) %>
+|
+<%= link_to 'destroy',
+            [surgical_profile, preop_risk_assessment],
+            method: :delete,
+            data: { confirm: 'Are you sure?' } %>
+
+</div>

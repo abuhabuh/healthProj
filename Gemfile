@@ -9,6 +9,7 @@ gem 'rails', '4.0.1'
 gem 'mysql2'
 gem 'foreigner'
 gem 'attr_encryptor'
+gem 'has-bit-field'
 
 ########### OTHER APP CORE #########
 gem 'devise'

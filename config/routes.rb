@@ -1,6 +1,4 @@
 HealthProj::Application.routes.draw do
-  resources :user_roles
-
   # TODO: Edit these routes and take out those taken over by backbone
   # TODO: Clean up routes shared between devise and 'resources :users'
 
@@ -13,9 +11,6 @@ HealthProj::Application.routes.draw do
   resources :user_surgeon_profiles
   resources :surgeon_specialties
 
-  resources :healthcare_providers do
-    resources :departments
-  end
   resources :races
   resources :ethnicities
   resources :countries
@@ -23,11 +18,20 @@ HealthProj::Application.routes.draw do
   resources :departments
   devise_for :users, :controllers => { :registrations => "registrations" }
   resources :users
+  resources :user_roles
+
+  resources :healthcare_providers do
+    resources :departments
+  end
 
   resources :patients do
     resources :surgical_profiles
   end
-  resources :surgical_profiles
+
+  resources :surgical_profiles do
+    resources :preop_risk_assessments
+  end
+
 
   # Standard page routes
   get '/admin', to: 'admin#index'
