@@ -22,9 +22,12 @@
   </div>
 </div>
 
-<div class='patient-detail-hor font-table-section-header' style='clear:both'>
-  <a href='/patients#/<%= id %>'>Patient Details: </a>
-</div>
+<!-- Do not show link to detail patient view if we already here -->
+<% if (!show_single) { %>
+  <div class='patient-detail-hor font-table-section-header' style='clear:both'>
+    <a href='/patients#/<%= id %>'>Patient Details</a>
+  </div>
+<% } %>
 
 <div class='patient-detail-hor' style='clear:both'>
   <div class='column1'>

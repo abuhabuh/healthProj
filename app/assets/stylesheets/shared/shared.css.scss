@@ -7,7 +7,6 @@ $font-size-logo: 2em;
 /* all divs float by default */
 div {
   float: left;
-  max-width: inherit;
 }
 
 /* common utility classes */
@@ -35,9 +34,9 @@ div {
 .common-list-item-container-hor {
   clear: both;
   text-align: left;
-  min-width: 600px;
   padding-top: 15px;
   padding-left: 10px;
+  width: 100%;
 }
   .common-main-hor {
     font-weight: bold;

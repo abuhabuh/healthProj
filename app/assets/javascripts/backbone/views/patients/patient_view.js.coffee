@@ -17,7 +17,9 @@ class HealthProj.Views.Patients.PatientView extends Backbone.View
     return false
 
   render: ->
-    $(@el).html(@template(@model.toJSON()))
+    templateVars = @model.toJSON()
+    templateVars['show_single'] = false
+    $(@el).html(@template(templateVars))
     return this
 
   toggleDetailView: ->

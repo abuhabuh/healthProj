@@ -1,12 +1,12 @@
 HealthProj.Views.Patients ||= {}
 
 class HealthProj.Views.Patients.EditView extends Backbone.View
-  template : JST["backbone/templates/patients/edit"]
+  template: JST["backbone/templates/patients/edit"]
 
-  events :
+  events:
     "submit #edit-patient" : "update"
 
-  update : (e) ->
+  update: (e) ->
     # DOB is saved in DB as string; backend model handles transform
     #   between string and date object
     e.preventDefault()
@@ -18,7 +18,7 @@ class HealthProj.Views.Patients.EditView extends Backbone.View
         window.location.hash = "/#{@model.id}"
     )
 
-  render : ->
+  render: ->
     $(@el).html(@template(@model.toJSON() ))
 
     this.$("form").backboneLink(@model)

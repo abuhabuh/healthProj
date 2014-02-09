@@ -15,8 +15,8 @@
     @extend .common-main-hor;
   }
     .patient-main-hor .col-name {
-      width: 24%;
-      padding-left: 1%;
+      width: 25%;
+      padding-left: 0%;
     }
     .patient-main-hor .col-mrn {
       width: 24%;
@@ -41,7 +41,9 @@
     .patient-detail-hor .column1 {
       width: 47%;
       padding-right: 3%;
+      padding-left: 2%;
+
     }
     .patient-detail-hor .column2 {
-      width: 50%;
+      width: 48%;
     }

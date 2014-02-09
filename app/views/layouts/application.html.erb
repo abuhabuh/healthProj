@@ -23,7 +23,7 @@
       <%= render 'layouts/header' %>
       <%= render 'layouts/main_nav' %>
 
-      <div style="clear:both;"> <!-- div sets content on new line -->
+      <div style="clear:both; width:100%"> <!-- div sets content on new line -->
         <%= yield %>
       </div>
     </div>
@@ -32,7 +32,7 @@
     <!-- javascript at bottom of page to speed up loading
       http://developer.yahoo.com/performance/rules.html#js_bottom -->
     <%= yield :javascript %>
-    
+
   </body>
 
 </html>
