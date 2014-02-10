@@ -10,21 +10,23 @@
   <div class='surgical-profile-main-hor clear-both'>
     <div class='col-cpt-code'>
       Profile CPT Code: <%= surgical_profile.cpt_code %>
-      <div class='control-links'>
-        <%= link_to 'Show me',
-              patient_surgical_profile_path(
-                patient,
-                surgical_profile,
-                :sp_view_mode => SurgicalProfilesController::SP_VIEW_GENERAL
-                )
-        %>
-        <%= link_to 'Edit',
-              edit_patient_surgical_profile_path(patient, surgical_profile) %>
-        <%= link_to 'Destroy',
-              patient_surgical_profile_path(patient, surgical_profile),
-              method: :delete,
-              data: { confirm: 'Are you sure?' } %>
-      </div>
+    </div>
+    <div class='col-control-links'>
+      <%= link_to 'Show Details',
+            patient_surgical_profile_path(
+              patient,
+              surgical_profile,
+              :sp_view_mode => SurgicalProfilesController::SP_VIEW_GENERAL
+              )
+      %>
+      |
+      <%= link_to 'Edit',
+            edit_patient_surgical_profile_path(patient, surgical_profile) %>
+      |
+      <%= link_to 'Destroy',
+            patient_surgical_profile_path(patient, surgical_profile),
+            method: :delete,
+            data: { confirm: 'Are you sure?' } %>
     </div>
   </div>
 

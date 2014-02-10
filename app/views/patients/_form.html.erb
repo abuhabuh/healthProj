@@ -57,7 +57,7 @@
   </div>
   <div class="field">
     <%= f.label :date_of_birth %><br>
-    <%= f.date_select :date_of_birth %>
+    <%= f.date_field :date_of_birth %>
   </div>
   <div class="field">
     <%= f.label :gender %><br>
@@ -65,15 +65,15 @@
   </div>
   <div class="field">
     <%= f.label :race %><br>
-    <%= f.text_field :race %>
+    <%= f.select :race_id, Race.get_all_races_selector_array() %>
   </div>
   <div class="field">
     <%= f.label :ethnicity %><br>
-    <%= f.text_field :ethnicity %>
+    <%= f.select :ethnicity_id, Ethnicity.get_all_ethnicities_selector_array() %>
   </div>
   <div class="field">
     <%= f.label :language %><br>
-    <%= f.text_field :language %>
+    <%= f.select :language_id, Language.get_all_languages_selector_array() %>
   </div>
   <div class="actions">
     <%= f.submit %>

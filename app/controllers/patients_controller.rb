@@ -1,8 +1,7 @@
 class PatientsController < ApplicationController
-  before_filter :authenticate_user!
-  # TODO: read up on before_action:
-  #  http://guides.rubyonrails.org/action_controller_overview.html
+  before_action :authenticate_user!
   before_action :set_patient, only: [:show, :edit, :update, :destroy]
+
   respond_to :html, :xml, :json
   authorize_resource
 
@@ -10,21 +9,36 @@ class PatientsController < ApplicationController
   # GET /patients.json
   def index
     @patients = Patient.query_all_patients(current_user)
+    @show_single = false
+
+    # load selector arrays for displaying patient data
+    load_patient_selector_arrays()
+
     respond_with @patients
   end
 
   # GET /patients/1
   # GET /patients/1.json
   def show
+    # load selector arrays for displaying patient data
+    load_patient_selector_arrays
+
+    @show_single = true
   end
 
   # GET /patients/new
   def new
+    # load selector arrays for displaying patient data
+    load_patient_selector_arrays
+
     @patient = Patient.new
   end
 
   # GET /patients/1/edit
   def edit
+    # load selector arrays for displaying patient data
+    load_patient_selector_arrays
+
   end
 
   # POST /patients
@@ -82,7 +96,15 @@ class PatientsController < ApplicationController
         :medical_record_id, :last_name, :first_name, :middle_initial,
         :address1, :address2, :city, :state, :home_phone, :phone,
         :work_phone, :cell_phone, :date_of_birth, :time, :gender,
-        :race, :ethnicity, :language
+        :race_id, :ethnicity_id, :language_id
       )
+
     end
+
+    def load_patient_selector_arrays
+      @races_selector_array = Race.get_all_races_selector_array()
+      @ethnicities_selector_array = Ethnicity.get_all_ethnicities_selector_array()
+      @languages_selector_array = Language.get_all_languages_selector_array()
+    end
+
 end

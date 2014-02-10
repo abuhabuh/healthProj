@@ -194,8 +194,6 @@ class SurgicalProfile < ActiveRecord::Base
   #   string for encryption
   def preprocess_and_update(surgical_profile_params)
     process_attrs_before_write_params(surgical_profile_params)
-    puts "@@@@"
-    puts surgical_profile_params
     return self.update(surgical_profile_params)
   end
 

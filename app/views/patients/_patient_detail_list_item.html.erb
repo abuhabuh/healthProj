@@ -1,0 +1,80 @@
+<div class='patient-container-hor clear-both'>
+  <div class='patient-main-hor clear-both'>
+    <div class='col-name'>
+      <%# Trim patient.last_name %>
+      <% if patient.last_name and patient.last_name != '' %>
+        <%= patient.last_name %>,
+      <% end %>
+      <%= patient.first_name %>
+      <%# Trim patient.middle_initial %>
+      <% if patient.middle_initial and patient.middle_initial != ''%>
+        <%= patient.middle_initial %>.
+      <% end %>
+    </div>
+    <div class='col-mrn'>
+      MRN: <%= patient.medical_record_id %>
+    </div>
+    <div class='col-dob'>
+      DOB: <%= patient.date_of_birth %>
+    </div>
+    <div class='col-age'>
+      Age: <%= patient.age %>
+    </div>
+    <div class='col-sex'>
+      <%= patient.gender %>
+    </div>
+  </div>
+
+  <!-- Do not show link to detail patient view if we already here -->
+  <% if not show_single %>
+    <div class='patient-detail-hor font-table-section-header clear-both'>
+      <%= link_to 'Patient Details', patient_path(patient) %>
+    </div>
+  <% end %>
+
+  <div class='patient-detail-hor clear-both'>
+    <div class='column1'>
+      <div class='clear-both'>
+        Address 1: <%= patient.address1 %>
+      </div>
+      <div class='clear-both'>
+        Address 2: <%= patient.address2 %>
+      </div>
+      <div class='clear-both'>
+        City: <%= patient.city %>
+      </div>
+      <div class='clear-both'>
+        State: <%= patient.state %>
+      </div>
+    </div>
+    <div class='column2'>
+      <div class='clear-both'>
+        Home Phone: <%= patient.home_phone %>
+      </div>
+      <div class='clear-both'>
+        Race: <%= Race.get_race_name(patient.race_id) %>
+      </div>
+      <div class='clear-both'>
+        Ethnicity: <%= Ethnicity.get_ethnicity_name(patient.ethnicity_id) %>
+      </div>
+      <div class='clear-both'>
+        Language: <%= Language.get_language_name(patient.language_id) %>
+      </div>
+      <div class='clear-both'>
+        <%= link_to 'Edit', edit_patient_path(patient) %>
+      </div>
+      <div class='clear-both'>
+        <%= link_to 'Surgical Profiles', patient_surgical_profiles_path(patient) %>
+      </div>
+    </div>
+    <% if show_single %>
+      <div class='clear-both'>
+        <p>
+          <br/>
+          <br/>
+          <%= link_to 'Back', patients_path %>
+        </p>
+      </div>
+    <% end %>
+  </div>
+</div>

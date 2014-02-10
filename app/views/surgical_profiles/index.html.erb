@@ -33,7 +33,10 @@
       <br/>
       <br/>
       <%= link_to 'New Surgical Profile',
-            new_patient_surgical_profile_path(@patient.id) %>
+        new_patient_surgical_profile_path(@patient.id) %>
+      |
+      <%= link_to 'Back to Patient',
+        patient_path(@patient) %>
     </p>
   </div>
 <% end %>
