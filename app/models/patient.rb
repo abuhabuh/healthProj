@@ -45,6 +45,8 @@ class Patient < ActiveRecord::Base
   # Static class variables
   @@ENUM_SEX = %w(male female)
 
+  @@RESULTS_LIMIT=10
+
   # Encryption
   attr_encrypted :medical_record_id, :key => :encryption_key
   attr_encrypted :date_of_birth, :key => :encryption_key
@@ -68,13 +70,14 @@ class Patient < ActiveRecord::Base
   ###
 
   # Returns patients viewable by current signed in user
-  # TEST - http://localhost:3000/patients
-  def self.query_all_patients(current_user)
+  # Paginates as set by limit parameter (paginated)
+  def self.query_all_patients(current_user, page=1, limit=@@RESULTS_LIMIT)
     if current_user.is_admin()
-      patients = Patient.all
+      patients = Patient.paginate(:page => page, :per_page => limit)
     elsif current_user.is_surgeon()
       patients = Patient.joins(:surgical_profiles)
                         .where(surgical_profiles: {user_id: current_user.id})
+                        .paginate(:page => page, :per_page => limit)
     end
 
     self.process_attrs_after_read_batch(patients)
@@ -109,9 +112,10 @@ class Patient < ActiveRecord::Base
 
   # Returns surgical profiles viewable by current signed in user
   # TEST - http://localhost:3000/patients/17/surgical_profiles
-  def query_surgical_profiles_inc_patients(current_user)
+  def query_surgical_profiles_inc_patients(
+      current_user, page=1, limit=@@RESULTS_LIMIT)
     return SurgicalProfile.query_all_by_patient_id_inc_patients(
-      current_user, self.id
+      current_user, self.id, page, limit
       )
   end
 
@@ -129,34 +133,16 @@ class Patient < ActiveRecord::Base
     return self.update(patient_params)
   end
 
-  # TODO implement this
+  # TODO: Check if this accounts for leap years
   def age
+    if self.date_of_birth
+      now = Time.now.utc.to_date
+      age = now.year - self.date_of_birth.year
+        - (self.date_of_birth.to_date.change(:year => now.year) > now ? 1 : 0)
+      return age
+    end
 
-    # js equivalent
-    # Calculates age from birthday date given
-    # # TODO: Can this be optimized? Does it need to be?
-    # window.calculateAge = (dob) ->
-
-    # todayDate = new Date()
-    # todayYear = todayDate.getFullYear()
-    # todayMonth = todayDate.getMonth()
-    # todayDay = todayDate.getDate()
-
-    # bornDate = new Date(dob)
-    # bornYear = bornDate.getFullYear()
-    # bornMonth = bornDate.getMonth()
-    # bornDay = bornDate.getDate()
-
-    # age = todayYear - bornYear
-
-    # if todayMonth < (bornMonth - 1)
-    #   age -= 1
-    # if (bornMonth - 1) == todayMonth && (todayDay < bornDay)
-    #   age -= 1
-
-    # return age
-
-    return 9
+    return 0
   end
 
   private

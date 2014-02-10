@@ -67,6 +67,26 @@ class User < ActiveRecord::Base
     return self._has_role UserRole::ROLE_ADMIN
   end
 
+  def get_full_name
+    return self.first_name + ' ' + self.last_name
+  end
+
+  def get_surgeon_title_name
+    return 'Dr. ' + self.get_full_name
+  end
+
+  def get_surgeon_title_name_possessive
+    name = get_surgeon_title_name
+    if name.length > 0
+      if name[-1] == 's'
+        return name + "'"
+      else
+        return name + "'s"
+      end
+    end
+    return name
+  end
+
   ###
   # Private methods
   ###

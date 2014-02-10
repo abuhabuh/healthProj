@@ -8,9 +8,8 @@
           profiles for a surgeon, else we are displaying for a
           patient %>
     <% if @surgeon %>
-      Surgical Profiles belonging to Surgeon:
-      <%= @surgeon.first_name %>
-      <%= @surgeon.last_name %>
+      Surgical Profiles for
+      <%= current_user.get_surgeon_title_name_possessive %> patients
     <% elsif @patient %>
       Surgical Profiles for Patient:
       <%= @patient.first_name %>
@@ -40,3 +39,7 @@
     </p>
   </div>
 <% end %>
+
+<div class='clear-both'>
+  <%= will_paginate @surgical_profiles %>
+</div>

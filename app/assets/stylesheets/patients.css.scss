@@ -36,7 +36,7 @@
     }
 
   .patient-detail-hor {
-    @extend common-detail-hor;
+    @extend .common-detail-hor;
   }
     .patient-detail-hor .column1 {
       width: 47%;

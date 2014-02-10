@@ -8,7 +8,13 @@ class PatientsController < ApplicationController
   # GET /patients - returns html page to render patients view
   # GET /patients.json
   def index
-    @patients = Patient.query_all_patients(current_user)
+    # Paginate patients - set page we're on
+    page = 1
+    if params.has_key?(:page)
+      page = params[:page]
+    end
+
+    @patients = Patient.query_all_patients(current_user, page)
     @show_single = false
 
     # load selector arrays for displaying patient data

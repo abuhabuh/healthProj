@@ -14,6 +14,7 @@ gem 'has-bit-field'
 ########### OTHER APP CORE #########
 gem 'devise'
 gem 'cancan'
+gem 'will_paginate', '~> 3.0'
 
 ########## FRONT END: js, css, etc ################
 # Front end js framework

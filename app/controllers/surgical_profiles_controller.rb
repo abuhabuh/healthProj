@@ -23,14 +23,20 @@ class SurgicalProfilesController < ApplicationController
     # Template has to handel:
     # - Display profiles for a patient
     # - Display profiles for a surgeon
+
+    page = 1
+    if params.has_key?(:page)
+      page = params[:page]
+    end
+
     @surgical_profiles = nil
     if @show_for_patient
       @surgical_profiles =
-        @patient.query_surgical_profiles_inc_patients(current_user)
+        @patient.query_surgical_profiles_inc_patients(current_user, page)
     else
       @surgeon = current_user
       @surgical_profiles =
-        SurgicalProfile.query_all_by_surgeon_inc_patients(current_user)
+        SurgicalProfile.query_all_by_surgeon_inc_patients(current_user, page)
     end
     respond_with @surgical_profiles
   end

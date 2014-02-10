@@ -5,7 +5,12 @@
 <div class='patients-list-container-hor clear-both'>
 
   <div class='font-page-title clear-both'>
-    Patients
+    <%# Custom header based on user role %>
+    <% if current_user.is_admin() %>
+      Patients
+    <% elsif current_user.is_surgeon() %>
+      Patients for <%= current_user.get_surgeon_title_name %>
+    <% end %>
   </div>
 
 
@@ -16,4 +21,8 @@
   <% end %>
 
 
+</div>
+
+<div class='clear-both'>
+  <%= will_paginate @posts %>
 </div>

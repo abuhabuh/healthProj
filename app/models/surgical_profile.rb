@@ -47,6 +47,10 @@ class SurgicalProfile < ActiveRecord::Base
     'Other',
     'Unknown'
     ]
+
+  @@RESULTS_LIMIT=10
+
+
   ####
   # Validations
   ####
@@ -60,8 +64,11 @@ class SurgicalProfile < ActiveRecord::Base
     return SurgicalProfile.where(user: surgeon)
   end
 
-  def self.query_all_by_surgeon_inc_patients(surgeon)
+  def self.query_all_by_surgeon_inc_patients(
+      surgeon, page=1, limit=@@RESULTS_LIMIT)
     return SurgicalProfile.where(user: surgeon).includes(:patient)
+                          .paginate(:page => page, :per_page => limit)
+
   end
 
   # Returns all surgical profiles associated with patient
@@ -78,17 +85,19 @@ class SurgicalProfile < ActiveRecord::Base
     end
   end
 
-  def self.query_all_by_patient_id_inc_patients(surgeon, patient_id)
+  def self.query_all_by_patient_id_inc_patients(
+      surgeon, patient_id, page=1, limit=@@RESULTS_LIMIT)
     if surgeon.is_admin()
       return SurgicalProfile.where(
                 surgical_profiles: {patient_id: patient_id})
               .includes(:patient)
-
+              .paginate(:page => page, :per_page => limit)
     else
       surgical_profiles =
         SurgicalProfile.where(surgical_profiles: {user_id: surgeon.id})
                        .where(surgical_profiles: {patient_id: patient_id})
                        .includes(:patient)
+                       .paginate(:page => page, :per_page => limit)
       return surgical_profiles
     end
   end
