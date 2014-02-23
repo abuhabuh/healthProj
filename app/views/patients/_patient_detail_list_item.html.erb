@@ -21,7 +21,7 @@
       Age: <%= patient.age %>
     </div>
     <div class='col-sex'>
-      <%= patient.gender %>
+      <%= Patient.get_gender_by_index(patient.gender) %>
     </div>
   </div>
 
@@ -70,6 +70,8 @@
         <p>
           <br/>
           <br/>
+          <%= link_to 'Edit', edit_patient_path %>
+          |
           <%= link_to 'Back', patients_path %>
         </p>
       </div>

@@ -46,6 +46,9 @@ class PreopRiskAssessment < ActiveRecord::Base
   attr_accessor :patient_id
 
   # Static class variables
+
+  # IMPORTANT: do not change order of array constants, only append;
+  # values tied to database entries indexed according to order
   @@DIABETES_MELLITUS_OPTIONS = [
     'Non-Insulin',
     'Insulin',

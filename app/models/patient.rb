@@ -43,7 +43,10 @@ class Patient < ActiveRecord::Base
   belongs_to :language
 
   # Static class variables
-  @@ENUM_SEX = %w(male female)
+
+  # IMPORTANT: do not change order of array constants, only append;
+  # values tied to database entries indexed according to order
+  @@GENDERS = %w(male female)
 
   @@RESULTS_LIMIT=10
 
@@ -63,7 +66,9 @@ class Patient < ActiveRecord::Base
   attr_encrypted :gender, :key => :encryption_key
 
   # Validation
-  validates_inclusion_of :gender, :in => @@ENUM_SEX
+
+  # Commented out because storing as 0,1 now
+  # validates_inclusion_of :gender, :in => @@GENDERS
 
   ###
   # Static methods
@@ -106,6 +111,34 @@ class Patient < ActiveRecord::Base
   end
 
 
+  # return static constants arrays
+
+  def self.get_patient_genders
+    return @@GENDERS
+  end
+
+  # return static constant nested arrays for selector that includes
+  #   select option value and text
+  # - [[male, 0], [female, 1] -> text is mapped to index
+  #   in the static constants array
+  def self.get_genders_select
+    return self.get_patient_genders.map.with_index{|x,i| [x,i]}
+  end
+
+  def self.get_gender_by_index(index)
+    # Since gender is encrypted, it's stored in DB as string so
+    #   so need to check
+    if index.is_a? String
+      index = index.to_i
+    end
+
+    if index.between?(0, @@GENDERS.length - 1)
+      return @@GENDERS[index]
+    end
+    return ''
+  end
+
+
   ###
   # Instance methods
   ###
@@ -145,6 +178,10 @@ class Patient < ActiveRecord::Base
     return 0
   end
 
+  def full_name
+    return self.first_name + ' ' + self.last_name
+  end
+
   private
     ###
     # Static methods
@@ -152,8 +189,10 @@ class Patient < ActiveRecord::Base
 
     # Convert certain attrs after read from DB (due to encryption needs)
     def self.process_attrs_after_read_single(patient)
-      if patient.date_of_birth
+      if patient.date_of_birth and patient.date_of_birth.strip.length > 0
         patient.date_of_birth = Date.parse(patient.date_of_birth)
+      else
+        patient.date_of_birth = nil # d.o.b. is not valid so make it nil
       end
     end
 

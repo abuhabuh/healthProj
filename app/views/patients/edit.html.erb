@@ -1,6 +1,13 @@
-<h1>Editing patient</h1>
+<% content_for :css do %>
+  <%= stylesheet_link_tag "patients", media: "all" %>
+<% end %>
+
+
+<h1>Editing: <%= @patient.full_name %></h1>
 
 <%= render 'form' %>
 
-<%= link_to 'Show', @patient %> |
-<%= link_to 'Back', patients_path %>
+<div class='clear-both'>
+  <%= link_to 'Show', @patient %> |
+  <%= link_to 'Back', patients_path %>
+</div>

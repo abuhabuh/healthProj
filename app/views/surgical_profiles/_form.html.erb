@@ -1,58 +1,80 @@
-<%= form_for [@patient, @surgical_profile] do |f| %>
-  <% if @surgical_profile.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@surgical_profile.errors.count, "error") %> prohibited this surgical_profile from being saved:</h2>
+<div class='surgical-profiles-form-container clear-both'>
+  <%= form_for [@patient, @surgical_profile] do |f| %>
+    <% if @surgical_profile.errors.any? %>
+      <div id="error_explanation">
+        <h2><%= pluralize(@surgical_profile.errors.count, "error") %> prohibited this surgical_profile from being saved:</h2>
 
-      <ul>
-      <% @surgical_profile.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
+        <ul>
+        <% @surgical_profile.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <%= f.hidden_field :patient_id, :value => @patient.id %>
+    <div class='clear-both'>
+      <div class='field-label'>
+        <%= f.label "Surgeon" %>
+      </div>
+      <%= f.select :user_id, @surgeons_selector_arr %>
+    </div>
+    <div class='clear-both'>
+      <div class='field-label'>
+        <%= f.label :patient_status %>
+      </div>
+      <%= f.select :patient_status, SurgicalProfile.get_patient_statuses_select() %>
+    </div>
+    <div class='clear-both'>
+      <div class='field-label'>
+        <%= f.label :elective_surgery %>
+      </div>
+      <%= f.select :elective_surgery, SurgicalProfile.get_elective_surgery_options_select() %>
+    </div>
+    <div class='clear-both'>
+      <div class='field-label'>
+        <%= f.label :principal_procedure %>
+      </div>
+      <%= f.text_field :principal_procedure %>
+    </div>
+    <div class='clear-both'>
+      <div class='field-label'>
+        <%= f.label :cpt_code %>
+      </div>
+      <%= f.text_field :cpt_code %>
+    </div>
+    <div class='clear-both'>
+      <div class='field-label'>
+        <%= f.label :origin_status %>
+      </div>
+      <%= f.select :origin_status, SurgicalProfile.get_origin_statuses_select() %>
+    </div>
+    <div class='clear-both'>
+      <div class='field-label'>
+        <%= f.label :hospital_admission_date %>
+      </div>
+      <%= f.date_field :hospital_admission_date %>
+    </div>
+    <div class='clear-both'>
+      <div class='field-label'>
+        <%= f.label :operation_date %>
+      </div>
+      <%= f.date_field :operation_date %>
+    </div>
+    <div class='clear-both'>
+      <div class='field-label'>
+        <%= f.label :anesthesia_technique %>
+      </div>
+      <%= f.select :anesthesia_technique, SurgicalProfile.get_anesthesia_techniques_select() %>
+    </div>
+    <div class='clear-both'>
+      <div class='field-label'>
+        <%= f.label :encounter_number %>
+      </div>
+      <%= f.number_field :encounter_number %>
+    </div>
+    <div class="clear-both actions">
+      <%= f.submit %>
     </div>
   <% end %>
-
-  <%= f.hidden_field :patient_id, :value => @patient.id %>
-  <div class="field">
-    <%= f.label "Surgeon" %><br>
-    <%= f.select :user_id, @surgeons_selector_arr %>
-  </div>
-  <div class="field">
-    <%= f.label :patient_status %><br>
-    <%= f.select :patient_status, SurgicalProfile.get_patient_statuses_select() %>
-  </div>
-  <div class="field">
-    <%= f.label :elective_surgery %><br>
-    <%= f.select :elective_surgery, SurgicalProfile.get_elective_surgery_options_select() %>
-  </div>
-  <div class="field">
-    <%= f.label :principal_procedure %><br>
-    <%= f.text_field :principal_procedure %>
-  </div>
-  <div class="field">
-    <%= f.label :cpt_code %><br>
-    <%= f.text_field :cpt_code %>
-  </div>
-  <div class="field">
-    <%= f.label :origin_status %><br>
-    <%= f.select :origin_status, SurgicalProfile.get_origin_statuses_select() %>
-  </div>
-  <div class="field">
-    <%= f.label :hospital_admission_date %><br>
-    <%= f.date_field :hospital_admission_date %>
-  </div>
-  <div class="field">
-    <%= f.label :operation_date %><br>
-    <%= f.date_field :operation_date %>
-  </div>
-  <div class="field">
-    <%= f.label :anesthesia_technique %><br>
-    <%= f.select :anesthesia_technique, SurgicalProfile.get_anesthesia_techniques_select() %>
-  </div>
-  <div class="field">
-    <%= f.label :encounter_number %><br>
-    <%= f.number_field :encounter_number %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
-<% end %>
+</div>

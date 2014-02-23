@@ -36,3 +36,9 @@
     @extend .common-detail-hor;
   }
 
+.surgical-profiles-form-container {
+  @extend .common-form-container;
+}
+  .surgical-profiles-form-container .field-label {
+    min-width: 170px;
+  }

@@ -1,81 +1,116 @@
-<%= form_for(@patient) do |f| %>
-  <% if @patient.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@patient.errors.count, "error") %> prohibited this patient from being saved:</h2>
+<div class='patients-form-container clear-both'>
+  <%= form_for(@patient) do |f| %>
+    <% if @patient.errors.any? %>
+      <div id="error_explanation">
+        <h2><%= pluralize(@patient.errors.count, "error") %> prohibited this patient from being saved:</h2>
 
-      <ul>
-      <% @patient.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
+        <ul>
+        <% @patient.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <div class='clear-both'>
+      <div class='field-label'>
+        <%= f.label :medical_record_id %>
+      </div>
+      <%= f.text_field :medical_record_id %>
+    </div>
+    <div class='clear-both'>
+      <div class='field-label'>
+        <%= f.label :last_name %>
+      </div>
+      <%= f.text_field :last_name %>
+    </div>
+    <div class='clear-both'>
+      <div class='field-label'>
+        <%= f.label :first_name %>
+      </div>
+      <%= f.text_field :first_name %>
+    </div>
+    <div class='clear-both'>
+      <div class='field-label'>
+        <%= f.label :middle_initial %>
+      </div>
+      <%= f.text_field :middle_initial %>
+    </div>
+    <div class='clear-both'>
+      <div class='field-label'>
+        <%= f.label :address1 %>
+      </div>
+      <%= f.text_field :address1 %>
+    </div>
+    <div class='clear-both'>
+      <div class='field-label'>
+        <%= f.label :address2 %>
+      </div>
+      <%= f.text_field :address2 %>
+    </div>
+    <div class='clear-both'>
+      <div class='field-label'>
+        <%= f.label :city %>
+      </div>
+      <%= f.text_field :city %>
+    </div>
+    <div class='clear-both'>
+      <div class='field-label'>
+        <%= f.label :state %>
+      </div>
+      <%= f.text_field :state %>
+    </div>
+    <div class='clear-both'>
+      <div class='field-label'>
+        <%= f.label :home_phone %>
+      </div>
+      <%= f.text_field :home_phone %>
+    </div>
+    <div class='clear-both'>
+      <div class='field-label'>
+        <%= f.label :work_phone %>
+      </div>
+      <%= f.text_field :work_phone %>
+    </div>
+    <div class='clear-both'>
+      <div class='field-label'>
+        <%= f.label :cell_phone %>
+      </div>
+      <%= f.text_field :cell_phone %>
+    </div>
+    <div class='clear-both'>
+      <div class='field-label'>
+        <%= f.label :date_of_birth %>
+      </div>
+      <%= f.date_field :date_of_birth %>
+    </div>
+    <div class='clear-both'>
+      <div class='field-label'>
+        <%= f.label :gender %>
+      </div>
+      <%= f.select :gender, Patient.get_genders_select() %>
+    </div>
+    <div class='clear-both'>
+      <div class='field-label'>
+        <%= f.label :race %>
+      </div>
+      <%= f.select :race_id, Race.get_all_races_selector_array() %>
+    </div>
+    <div class='clear-both'>
+      <div class='field-label'>
+        <%= f.label :ethnicity %>
+      </div>
+      <%= f.select :ethnicity_id, Ethnicity.get_all_ethnicities_selector_array() %>
+    </div>
+    <div class='clear-both'>
+      <div class='field-label'>
+        <%= f.label :language %>
+      </div>
+      <%= f.select :language_id, Language.get_all_languages_selector_array() %>
+    </div>
+    <div class='action clear-both'>
+      <br/>
+      <%= f.submit %>
     </div>
   <% end %>
-
-  <div class="field">
-    <%= f.label :medical_record_id %><br>
-    <%= f.number_field :medical_record_id %>
-  </div>
-  <div class="field">
-    <%= f.label :last_name %><br>
-    <%= f.text_field :last_name %>
-  </div>
-  <div class="field">
-    <%= f.label :first_name %><br>
-    <%= f.text_field :first_name %>
-  </div>
-  <div class="field">
-    <%= f.label :middle_initial %><br>
-    <%= f.text_field :middle_initial %>
-  </div>
-  <div class="field">
-    <%= f.label :address1 %><br>
-    <%= f.text_field :address1 %>
-  </div>
-  <div class="field">
-    <%= f.label :address2 %><br>
-    <%= f.text_field :address2 %>
-  </div>
-  <div class="field">
-    <%= f.label :city %><br>
-    <%= f.text_field :city %>
-  </div>
-  <div class="field">
-    <%= f.label :state %><br>
-    <%= f.text_field :state %>
-  </div>
-  <div class="field">
-    <%= f.label :home_phone %><br>
-    <%= f.text_field :home_phone %>
-  </div>
-  <div class="field">
-    <%= f.label :work_phone %><br>
-    <%= f.text_field :work_phone %>
-  </div>
-  <div class="field">
-    <%= f.label :cell_phone %><br>
-    <%= f.text_field :cell_phone %>
-  </div>
-  <div class="field">
-    <%= f.label :date_of_birth %><br>
-    <%= f.date_field :date_of_birth %>
-  </div>
-  <div class="field">
-    <%= f.label :gender %><br>
-    <%= f.text_field :gender %>
-  </div>
-  <div class="field">
-    <%= f.label :race %><br>
-    <%= f.select :race_id, Race.get_all_races_selector_array() %>
-  </div>
-  <div class="field">
-    <%= f.label :ethnicity %><br>
-    <%= f.select :ethnicity_id, Ethnicity.get_all_ethnicities_selector_array() %>
-  </div>
-  <div class="field">
-    <%= f.label :language %><br>
-    <%= f.select :language_id, Language.get_all_languages_selector_array() %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
-<% end %>
+</div>

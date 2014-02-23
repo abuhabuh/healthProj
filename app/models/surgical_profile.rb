@@ -26,6 +26,9 @@ class SurgicalProfile < ActiveRecord::Base
 
   # Static class variables
   # TODO: make interaction with this more graceful? Reduce hard coding
+  #
+  # IMPORTANT: do not change order of array constants, only append;
+  # values tied to database entries indexed according to order
   @@PATIENT_STATUSES = %w(Inpatient Outpatient)
   @@ELECTIVE_SURGERY_OPTIONS = %w(Yes No Unknown)
   @@ORIGIN_STATUSES = [
