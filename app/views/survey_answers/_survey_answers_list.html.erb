@@ -1,0 +1,25 @@
+<div class='clear-both survey-answers-container'>
+
+  <div class='clear-both survey-answers-heading'>
+    <div class='text-col'>
+      Answers:
+    </div>
+    <div class='value-col'>
+      Value:
+    </div>
+  </div>
+
+  <div class='clear-both survey-answers-list'>
+    <% survey_question.get_answers().each do |answer| %>
+      <%= render partial: 'survey_answers/survey_answer_detail_list_item',
+            locals: {survey_question: survey_question, answer: answer} %>
+    <% end %>
+  </div>
+  <div class='clear-both survey-question-add-answer-field'>
+    Add Answer:
+    <% new_answer = SurveyAnswer.new %>
+    <%= render partial: 'survey_answers/form_simple',
+          locals: {survey_question: survey_question,
+                   survey_answer: new_answer} %>
+  </div>
+</div>

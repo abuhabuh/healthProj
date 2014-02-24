@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140126093046) do
+ActiveRecord::Schema.define(version: 20140223080716) do
 
   create_table "countries", force: true do |t|
     t.string   "name"
@@ -171,6 +171,23 @@ ActiveRecord::Schema.define(version: 20140126093046) do
   add_index "surgical_profiles", ["patient_id"], name: "index_surgical_profiles_on_patient_id", using: :btree
   add_index "surgical_profiles", ["user_id"], name: "index_surgical_profiles_on_user_id", using: :btree
 
+  create_table "survey_answers", force: true do |t|
+    t.string   "answer_text"
+    t.integer  "answer_value"
+    t.integer  "survey_question_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "survey_answers", ["survey_question_id"], name: "index_survey_answers_on_survey_question_id", using: :btree
+
+  create_table "survey_questions", force: true do |t|
+    t.string   "question_text"
+    t.integer  "is_active"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "user_roles", force: true do |t|
     t.integer  "user_id"
     t.integer  "role_id"
@@ -224,6 +241,8 @@ ActiveRecord::Schema.define(version: 20140126093046) do
 
   add_foreign_key "surgical_profiles", "patients", name: "surgical_profiles_patient_id_fk"
   add_foreign_key "surgical_profiles", "users", name: "surgical_profiles_user_id_fk"
+
+  add_foreign_key "survey_answers", "survey_questions", name: "survey_answers_survey_question_id_fk"
 
   add_foreign_key "user_roles", "roles", name: "user_roles_role_id_fk"
   add_foreign_key "user_roles", "users", name: "user_roles_user_id_fk"

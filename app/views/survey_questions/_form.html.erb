@@ -1,0 +1,30 @@
+<div class='survey-questions-form-container clear-both'>
+  <%= form_for(@survey_question) do |f| %>
+    <% if @survey_question.errors.any? %>
+      <div id="error_explanation">
+        <h2><%= pluralize(@survey_question.errors.count, "error") %> prohibited this survey_question from being saved:</h2>
+
+        <ul>
+        <% @survey_question.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <div class="clear-both">
+      <%= f.label :question_text %><br>
+      <%= f.text_field :question_text, :size => 80%>
+    </div>
+    <div class='clear-both'>
+      <%= f.label :is_active %>
+      <%= f.select :is_active, SurveyQuestion.get_is_active_values_select(),
+        :selected => 1 %>
+    </div>
+
+    <div class="clear-both actions">
+      <br/>
+      <%= f.submit %>
+    </div>
+  <% end %>
+</div>

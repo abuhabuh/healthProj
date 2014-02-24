@@ -32,6 +32,10 @@ HealthProj::Application.routes.draw do
     resources :preop_risk_assessments
   end
 
+  resources :survey_questions do
+    resources :survey_answers
+  end
+
 
   # Standard page routes
   get '/admin', to: 'admin#index'

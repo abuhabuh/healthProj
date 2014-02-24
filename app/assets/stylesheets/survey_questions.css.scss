@@ -1,0 +1,60 @@
+// Contains styles for both survey questions and survey answers
+// - If answers becomes more complicated and needs own pages / styles,
+//   then break out into separate css file
+
+@import "shared/shared";
+
+.survey-question-list-container-hor {
+  @extend .common-list-container-hor;
+}
+
+.survey-question-container-hor {
+  @extend .common-list-item-container-hor;
+}
+  .survey-question-main-hor {
+    @extend .common-main-hor;
+  }
+  .survey-question-detail-hor {
+    @extend .common-detail-hor;
+  }
+
+.survey-questions-form-container {
+  @extend .common-form-container;
+}
+
+
+
+.survey-answers-container {
+  width: 100%;
+}
+  .survey-answers-heading {
+    width: 100%;
+  }
+    .survey-answers-heading .text-col{
+      width: 45%;
+    }
+    .survey-answers-heading .value-col{
+      width: 55%;
+    }
+  .survey-answers-list {
+    width: 100%;
+  }
+    .survey-answer-list-item {
+      padding-left: 5%;
+      width: 95%;
+    }
+      .survey-answer-list-item .text-col {
+        width: 45%;
+      }
+      .survey-answer-list-item .value-col {
+        width: 25%;
+      }
+      .survey-answer-list-item .links-col {
+        width: 30%;
+      }
+
+.survey-question-add-answer-field {
+  padding-top: 15px;
+  width: 100%;
+}
+

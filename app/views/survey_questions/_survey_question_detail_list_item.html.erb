@@ -1,0 +1,19 @@
+<div class='clear-both survey-question-container-hor'>
+  <div class='clear-both survey-question-main-hor'>
+    <%= survey_question.question_text %>
+
+    <span style='font-weight: normal;'>
+      <%= link_to 'Show', survey_question %>
+      <%= link_to 'Edit', edit_survey_question_path(survey_question) %>
+      <%= link_to 'Destroy', survey_question, method: :delete,
+            data: { confirm: 'Are you sure?' } %>
+    </span>
+
+  </div>
+
+  <div class='clear-both survey-question-detail-hor'>
+    <%= render partial: 'survey_answers/survey_answers_list',
+          locals: {survey_question: survey_question} %>
+  </div>
+
+</div>

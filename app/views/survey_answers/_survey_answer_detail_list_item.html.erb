@@ -1,0 +1,17 @@
+<div class='clear-both survey-answer-list-item'>
+  <div class='text-col'>
+    <%= answer.answer_text %>
+  </div>
+  <div class='value-col'>
+    <%= answer.answer_value %>
+  </div>
+  <div class='links-col'>
+    <%= link_to 'Edit',
+          edit_survey_question_survey_answer_path(survey_question, answer) %>
+    |
+    <%= link_to 'Destroy',
+          survey_question_survey_answer_path(survey_question, answer),
+          method: :delete,
+          data: { confirm: 'Are you sure?' } %>
+  </div>
+</div>

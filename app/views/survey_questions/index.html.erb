@@ -1,0 +1,20 @@
+<% content_for :css do %>
+  <%= stylesheet_link_tag "survey_questions", media: "all" %>
+<% end %>
+
+<h1>Survey Questions</h1>
+
+<div class='clear-both survey-question-list-container-hor'>
+
+  <% @survey_questions.each do |survey_question| %>
+    <%= render partial: 'survey_question_detail_list_item',
+          locals: {survey_question: survey_question} %>
+  <% end %>
+
+</div>
+
+<div class='clear-both'>
+  <br/>
+  <br/>
+  <%= link_to 'New Survey question', new_survey_question_path %>
+</div>
